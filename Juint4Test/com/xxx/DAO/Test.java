@@ -1,9 +1,8 @@
 package com.xxx.DAO;
 
 public class Test {
-@Override
-public String toString() {
-	// TODO Auto-generated method stub
-	return super.toString();
-}
+
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
 }
