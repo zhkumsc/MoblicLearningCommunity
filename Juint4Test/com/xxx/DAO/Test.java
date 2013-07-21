@@ -3,6 +3,6 @@ package com.xxx.DAO;
 public class Test {
 
 	public Test() {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor stubjihiuhniu
 	}
 }
