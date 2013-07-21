@@ -1,6 +1,5 @@
 package com.xxx.DAO;
 
 public class test2 {
-	//fghfghfgh765765767
-
+	//黑第三方第三方
 }
