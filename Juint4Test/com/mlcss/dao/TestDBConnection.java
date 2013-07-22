@@ -1,11 +1,11 @@
-package com.xxx.DAO;
+package com.mlcss.dao;
 
 import org.junit.Test;
 
 import com.mlcss.dao.DBConnection;
 
 /**
- * 用于测试DBConnection的单元测试类
+ * 鐢ㄤ簬娴嬭瘯DBConnection鐨勫崟鍏冩祴璇曠被
  * @author fantasy
  *
  */
@@ -16,3 +16,4 @@ public class TestDBConnection {
 		DBConnection.getConnection();
 	}
 }
+

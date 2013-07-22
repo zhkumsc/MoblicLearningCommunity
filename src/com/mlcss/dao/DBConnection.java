@@ -7,8 +7,8 @@ import java.util.Properties;
 
 
 /**
- * ��ݿ⹫�ò���
- * ע�⣬�޸�����ݿ������ļ�֮��Ҫ����Tomcat
+ * 数据库连接
+ * 
  * @author fantasy
  *
  */
@@ -19,7 +19,7 @@ public class DBConnection {
 
 	
 	/**
-	 *  ��ȡ�����ļ������ֵ
+	 *  通过配置文件初始化
 	 */
 	static {
 		Properties pro = new Properties();
@@ -38,8 +38,8 @@ public class DBConnection {
 	}
 
 	/**
-	 * �����ݿ�ʵ��
-	 * @return �����ݿ�ʵ��
+	 * 返回数据库Connction实例
+	 * @return Connection实例
 	 */
 	public static Connection getConnection() {
 		Connection conn = null; 

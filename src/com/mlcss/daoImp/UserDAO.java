@@ -38,6 +38,11 @@ public class UserDAO implements BeanDAO {
 		return null;
 	}
 
+	public List<Serializable> findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 
