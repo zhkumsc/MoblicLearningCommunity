@@ -2,7 +2,7 @@ package com.xxx.DAO;
 
 import org.junit.Test;
 
-import com.xxx.DAO.DBConnection;
+import com.mlcss.dao.DBConnection;
 
 /**
  * 用于测试DBConnection的单元测试类

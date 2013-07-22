@@ -1,4 +1,4 @@
-package com.xxx.DAO;
+package com.mlcss.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,8 +7,8 @@ import java.util.Properties;
 
 
 /**
- * Êı¾İ¿â¹«ÓÃ²Ù×÷
- * ×¢Òâ£¬ĞŞ¸ÄÁËÊı¾İ¿âÅäÖÃÎÄ¼şÖ®ºóÒªÖØÆôTomcat
+ * ï¿½ï¿½İ¿â¹«ï¿½Ã²ï¿½ï¿½ï¿½
+ * ×¢ï¿½â£¬ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ö®ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Tomcat
  * @author fantasy
  *
  */
@@ -19,7 +19,7 @@ public class DBConnection {
 
 	
 	/**
-	 *  ¶ÁÈ¡ÅäÖÃÎÄ¼ş¸ø²ÎÊı¸³Öµ
+	 *  ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 	 */
 	static {
 		Properties pro = new Properties();
@@ -38,8 +38,8 @@ public class DBConnection {
 	}
 
 	/**
-	 * »ñµÃÊı¾İ¿âÊµÀı
-	 * @return »ñµÃÊı¾İ¿âÊµÀı
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½Êµï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½Êµï¿½ï¿½
 	 */
 	public static Connection getConnection() {
 		Connection conn = null; 
@@ -49,7 +49,7 @@ public class DBConnection {
 			conn = DriverManager.getConnection(url, username, password);
 
 		} catch (Exception e) {
-			System.out.println("Êı¾İ¿âÁ¬½ÓÊ§°Ü" + e.getMessage());
+			System.out.println("ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½" + e.getMessage());
 		}
 		return conn; 
 	}

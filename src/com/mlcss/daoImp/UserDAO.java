@@ -1,12 +1,12 @@
-package com.xxx.DAOimp;
+package com.mlcss.daoImp;
 
 import java.io.Serializable;
 import java.util.List;
 
-import com.xxx.DAO.BeanDAO;
+import com.mlcss.dao.BeanDAO;
 
 /**
- * ÓÃÓÚUser bean µÄDAO
+ * ï¿½ï¿½ï¿½ï¿½User bean ï¿½ï¿½DAO
  *
  * @author fantasy
  *

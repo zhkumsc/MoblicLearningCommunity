@@ -1,4 +1,4 @@
-package com.xxx.beans;
+package com.mlcss.bean;
 
 import java.io.Serializable;
 
