@@ -1,10 +1,9 @@
-#Tue Jul 23 12:50:08 CST 2013
+#Tue Jul 23 19:39:26 CST 2013
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=branch 'master' of ssh\://git@github.com/zhkumsc/MoblicLearningCommunity.git
 eclipse.preferences.version=1
 encoding//Juint4Test/com/mlcss/otherTest/JsonTest.java=UTF-8
-encoding//src/com/mlcss/dao/DBConnection.java=UTF-8
 encoding//src/com/mlcss/dao/impl/UserDAOImpl.java=UTF-8
 encoding//src/com/mlcss/servlet/filter/CheckLoginFilter.java=UTF-8
 encoding//src/dbinfo.properties=UTF-8

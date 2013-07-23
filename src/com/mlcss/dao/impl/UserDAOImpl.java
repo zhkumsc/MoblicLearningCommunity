@@ -12,8 +12,7 @@ import com.mlcss.dao.UserDAO;
 import com.mlcss.dao.DBConnection;
 
 /**
- * ����User bean ��DAO
- *
+ * User 数据访问
  * @author fantasy
  *
  */
@@ -103,13 +102,13 @@ public class UserDAOImpl implements UserDAO {
 		return b;
 	}
 
-	public Serializable findById(int id) {
+	public User findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Serializable> listAll() {
+	public List<User> listAll() {
 		
 		@SuppressWarnings("rawtypes")
 		List list = new ArrayList();
@@ -137,21 +136,23 @@ public class UserDAOImpl implements UserDAO {
 		return list;	
 	}
 
-	public List<Serializable> findByName(String name) {
+	public List<User> findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public User findByEmail(String email){
+	
+	public User findByEmail(String email) {
 		
-		User u = new User();
+		User u = null;
 		conn = DBConnection.getConnection();
 		String sql = "select * from users where email = '" + email + "'";
 		
 		try{
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			while(rs.next()){				
+			while(rs.next()){	
+				u = new User();		// 修改了在这里初始化 （黄）
 				u.setId(rs.getInt(1));
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));

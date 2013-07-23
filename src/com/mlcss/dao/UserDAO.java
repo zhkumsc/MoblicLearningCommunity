@@ -9,7 +9,8 @@ public interface UserDAO {
 	public boolean add(User user);
 	public boolean delete(Serializable bean);
 	public boolean update(User user);
-	public Serializable findById(int id);
-	public List<Serializable> findByName(String name);
-	public List<Serializable> listAll();
+	public User findById(int id);
+	public User findByEmail(String email);
+	public List<User> findByName(String name);
+	public List<User> listAll();
 }

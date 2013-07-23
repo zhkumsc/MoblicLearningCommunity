@@ -49,7 +49,7 @@ public class DBConnection {
 			conn = DriverManager.getConnection(url, username, password);
 
 		} catch (Exception e) {
-			System.out.println("��ݿ�����ʧ��" + e.getMessage());
+			System.out.println(e.getMessage());
 		}
 		return conn; 
 	}
