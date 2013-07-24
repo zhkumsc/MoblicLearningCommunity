@@ -5,9 +5,19 @@ import java.security.NoSuchAlgorithmException;
 
 import sun.misc.BASE64Encoder;
 
+/**
+ * 一些用到的工具包
+ * @author fantasy
+ *
+ */
 
 public class ServiceUtil {
 
+	/**
+	 * md5 数据摘要+base64加密返回
+	 * @param source 待加密字符串
+	 * @return base64加密字符串
+	 */
 	public static String toMD5(String source) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("md5");

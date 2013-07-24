@@ -32,7 +32,8 @@ public class UserRegister extends HttpServlet {
 			throws ServletException, IOException {	
 		String userJsonString = request.getParameter("json");
 System.out.println(userJsonString);
-		JSONObject o = JSONObject.fromObject(userJsonString);
+		JSONObject o;
+		o = JSONObject.fromObject(userJsonString);
 		User u = (User)JSONObject.toBean(o, User.class);
 		resgiter(response, u);	
 	}
