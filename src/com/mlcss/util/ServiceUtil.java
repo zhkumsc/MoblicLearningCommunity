@@ -7,6 +7,7 @@ import sun.misc.BASE64Encoder;
 
 /**
  * 一些用到的工具包
+ * md5编码
  * @author fantasy
  *
  */
