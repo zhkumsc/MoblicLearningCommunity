@@ -1,4 +1,4 @@
-package com.mlcss.dao;
+package com.mlcss.util;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.Properties;
  * @author fantasy
  *
  */
-public class DBConnection {
+public class DBUtil {
 	private static String url = null;
 	private static String username = null;
 	private static String password = null;
@@ -24,7 +24,7 @@ public class DBConnection {
 	static {
 		Properties pro = new Properties();
 		try {
-			pro.load(DBConnection.class.getClassLoader().getResourceAsStream("dbinfo.properties"));
+			pro.load(DBUtil.class.getClassLoader().getResourceAsStream("dbinfo.properties"));
 			url = pro.getProperty("url");
 			username = pro.getProperty("username");
 			password = pro.getProperty("password");

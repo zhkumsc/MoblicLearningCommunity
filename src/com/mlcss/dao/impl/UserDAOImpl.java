@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.mlcss.bean.User;
 import com.mlcss.dao.UserDAO;
-import com.mlcss.dao.DBConnection;
+import com.mlcss.util.DBUtil;
 
 /**
  * User 数据访问
@@ -26,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
 		boolean b=false;
 		try{
 			//得到链接
-			conn=DBConnection.getConnection();
+			conn=DBUtil.getConnection();
 			String sql="insert into users(name,password,email) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"') ";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
@@ -66,7 +66,7 @@ public class UserDAOImpl implements UserDAO {
 		boolean b=false;
 		try{
 			//得到链接
-			conn=DBConnection.getConnection();
+			conn=DBUtil.getConnection();
 			String sql="delete from users where id='"+bean+"'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
@@ -86,7 +86,7 @@ public class UserDAOImpl implements UserDAO {
 		boolean b=false;
 		try{
 			//得到链接
-			conn=DBConnection.getConnection();
+			conn=DBUtil.getConnection();
 			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"' where id='"+user.getId()+"'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
@@ -112,7 +112,7 @@ public class UserDAOImpl implements UserDAO {
 		
 		@SuppressWarnings("rawtypes")
 		List list = new ArrayList();
-		conn = DBConnection.getConnection();
+		conn = DBUtil.getConnection();
 		String sql = "select * from users";
 		
 		try{
@@ -145,7 +145,7 @@ public class UserDAOImpl implements UserDAO {
 	public User findByEmail(String email) {
 		
 		User u = null;
-		conn = DBConnection.getConnection();
+		conn = DBUtil.getConnection();
 		String sql = "select * from users where email = '" + email + "'";
 		
 		try{
