@@ -21,5 +21,6 @@ public class TestDBUtil {
 		if(rs.next()){
 			System.out.println(rs.getInt(1));
 		}
+		System.out.println("两边同时修改了，整合是应该会冲突！");
 	}
 }
