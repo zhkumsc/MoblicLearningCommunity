@@ -2,7 +2,6 @@ package com.mlcss.dao.impl;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,11 +19,10 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 	
 	public boolean add(UserRelShip urs) {
 		boolean b=false;
-		Date date = new java.sql.Date(urs.getCreateTime().getTime());
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="insert into userrelationship(userId,friendId,groupId,createTime) values('"+urs.getUserId()+"','"+urs.getFriendId()+"','"+urs.getGroupId()+"','"+date+"') ";
+			String sql="insert into userrelationship(userId,friendId,groupId,createTime) values('"+urs.getUserId()+"','"+urs.getFriendId()+"','"+urs.getGroupId()+"','"+urs.getCreateTime()+"') ";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -94,7 +92,7 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 				urs.setId(rs.getInt(2));
 				urs.setId(rs.getInt(3));
 				urs.setId(rs.getInt(4));
-				urs.setCreateTime(rs.getDate(5));
+				urs.setCreateTime(rs.getTimestamp(5));
 			}
 			
 		}catch(Exception e){
@@ -119,7 +117,7 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 				urs.setId(rs.getInt(2));
 				urs.setId(rs.getInt(3));
 				urs.setId(rs.getInt(4));
-				urs.setCreateTime(rs.getDate(5));
+				urs.setCreateTime(rs.getTimestamp(5));
 				
 				list.add(urs);
 			}

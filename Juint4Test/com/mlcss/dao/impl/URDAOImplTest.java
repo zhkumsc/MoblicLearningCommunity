@@ -1,7 +1,7 @@
 package com.mlcss.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -15,11 +15,10 @@ public class URDAOImplTest {
 	
 	@Test
 	public void testAdd(){
-		Date d = new Date();     
 		ur.setUserId(10);
 		ur.setTitle("java作业");
 		ur.setContent("java第二次试验结束时间快到了，明天记得要做完哦！");
-		ur.setCreateTime(d);
+		ur.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		Calendar c = Calendar.getInstance();
 		c.set(2013, 9, 1);    //可以对每个时间域单独修改
 		ur.setRemindTime(c.getTime());

@@ -20,12 +20,11 @@ public class UserRemarksDAOImpl implements UserRemarksDAO {
 
 	public boolean add(UserRemarks ur) {
 		boolean b=false;
-		Date date1 = new java.sql.Date(ur.getCreateTime().getTime());
 		Date date2 = new java.sql.Date(ur.getRemindTime().getTime());
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="insert into userremarks(userId,title,content,createTime,remindTime) values('"+ur.getUserId()+"','"+ur.getTitle()+"','"+ur.getContent()+"','"+date1+"','"+date2+"') ";
+			String sql="insert into userremarks(userId,title,content,createTime,remindTime) values('"+ur.getUserId()+"','"+ur.getTitle()+"','"+ur.getContent()+"','"+ur.getCreateTime()+"','"+date2+"') ";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -96,7 +95,7 @@ public class UserRemarksDAOImpl implements UserRemarksDAO {
 				ur.setUserId(rs.getInt(2));
 				ur.setTitle(rs.getString(3));
 				ur.setContent(rs.getString(4));				
-				ur.setCreateTime(rs.getDate(5));
+				ur.setCreateTime(rs.getTimestamp(5));
 				ur.setRemindTime(rs.getDate(6));
 			}
 			
@@ -122,7 +121,7 @@ public class UserRemarksDAOImpl implements UserRemarksDAO {
 				ur.setUserId(rs.getInt(2));
 				ur.setTitle(rs.getString(3));
 				ur.setContent(rs.getString(4));
-				ur.setCreateTime(rs.getDate(5));
+				ur.setCreateTime(rs.getTimestamp(5));
 				ur.setRemindTime(rs.getDate(6));
 			}
 			
@@ -148,7 +147,7 @@ public class UserRemarksDAOImpl implements UserRemarksDAO {
 				ur.setUserId(rs.getInt(2));
 				ur.setTitle(rs.getString(3));
 				ur.setContent(rs.getString(4));
-				ur.setCreateTime(rs.getDate(5));
+				ur.setCreateTime(rs.getTimestamp(5));
 				ur.setRemindTime(rs.getDate(6));
 				
 				list.add(ur);

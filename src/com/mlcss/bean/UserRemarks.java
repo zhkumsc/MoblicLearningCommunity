@@ -1,5 +1,6 @@
 package com.mlcss.bean;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserRemarks {
@@ -7,7 +8,7 @@ public class UserRemarks {
 	private int userId;
 	private String title;
 	private String content;
-	private Date createTime;
+	private Timestamp createTime;
 	private Date RemindTime;
 	public int getId() {
 		return id;
@@ -33,10 +34,10 @@ public class UserRemarks {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 	public Date getRemindTime() {

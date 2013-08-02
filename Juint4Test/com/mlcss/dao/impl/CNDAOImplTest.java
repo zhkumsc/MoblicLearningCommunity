@@ -1,6 +1,6 @@
 package com.mlcss.dao.impl;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class CNDAOImplTest {
 		cn.setCoursesId(1);
 		cn.setNoticeTitle("基金第三方");
 		cn.setContent("明天的课推迟到后天!");
-		cn.setNoticeTime(new Date());
+		cn.setNoticeTime(new Timestamp(System.currentTimeMillis()));
 		cn.setUserId(10);
 		
 		cndi.add(cn);

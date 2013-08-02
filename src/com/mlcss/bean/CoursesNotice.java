@@ -1,13 +1,13 @@
 package com.mlcss.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class CoursesNotice {
 	private int id;
 	private int coursesId;
 	private String noticeTitle;
 	private String content;
-	private Date noticeTime;
+	private Timestamp noticeTime;
 	private int userId;
 	public int getId() {
 		return id;
@@ -33,10 +33,10 @@ public class CoursesNotice {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getNoticeTime() {
+	public Timestamp getNoticeTime() {
 		return noticeTime;
 	}
-	public void setNoticeTime(Date noticeTime) {
+	public void setNoticeTime(Timestamp noticeTime) {
 		this.noticeTime = noticeTime;
 	}
 	public int getUserId() {

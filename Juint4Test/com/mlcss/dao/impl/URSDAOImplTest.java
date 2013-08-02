@@ -1,6 +1,6 @@
 package com.mlcss.dao.impl;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class URSDAOImplTest {
 		urs.setUserId(10);
 		urs.setFriendId(13);
 		urs.setGroupId(1);
-		urs.setCreateTime(new Date());
+		urs.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		ursdi.add(urs);
 	}
 	

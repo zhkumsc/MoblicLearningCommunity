@@ -1,13 +1,13 @@
 package com.mlcss.bean;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class UserRelShip {
 	private int id;
 	private int userId;
 	private int friendId;
 	private int groupId;
-	private Date createTime;
+	private Timestamp createTime;
 	public int getId() {
 		return id;
 	}
@@ -32,10 +32,10 @@ public class UserRelShip {
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}
-	public Date getCreateTime() {
+	public Timestamp getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
 }

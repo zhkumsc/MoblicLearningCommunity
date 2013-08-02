@@ -2,7 +2,6 @@ package com.mlcss.dao.impl;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,11 +19,10 @@ public class CoursesNoticeDAOImpl implements CoursesNoticeDAO {
 
 	public boolean add(CoursesNotice cn) {
 		boolean b=false;
-		Date date = new java.sql.Date(cn.getNoticeTime().getTime());
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="insert into coursesnotice(coursesId,noticeTitle,content,noticeTime,userId) values('"+cn.getCoursesId()+"','"+cn.getNoticeTitle()+"','"+cn.getContent()+"','"+date+"','"+cn.getUserId()+"') ";
+			String sql="insert into coursesnotice(coursesId,noticeTitle,content,noticeTime,userId) values('"+cn.getCoursesId()+"','"+cn.getNoticeTitle()+"','"+cn.getContent()+"','"+cn.getNoticeTime()+"','"+cn.getUserId()+"') ";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -94,7 +92,7 @@ public class CoursesNoticeDAOImpl implements CoursesNoticeDAO {
 				cn.setCoursesId(rs.getInt(2));
 				cn.setNoticeTitle(rs.getString(3));
 				cn.setContent(rs.getString(4));
-				cn.setNoticeTime(rs.getDate(5));
+				cn.setNoticeTime(rs.getTimestamp(5));
 				cn.setUserId(rs.getInt(6));
 			}
 			
@@ -120,7 +118,7 @@ public class CoursesNoticeDAOImpl implements CoursesNoticeDAO {
 				cn.setCoursesId(rs.getInt(2));
 				cn.setNoticeTitle(rs.getString(3));
 				cn.setContent(rs.getString(4));
-				cn.setNoticeTime(rs.getDate(5));
+				cn.setNoticeTime(rs.getTimestamp(5));
 				cn.setUserId(rs.getInt(6));
 			}
 			
@@ -146,7 +144,7 @@ public class CoursesNoticeDAOImpl implements CoursesNoticeDAO {
 				cn.setCoursesId(rs.getInt(2));
 				cn.setNoticeTitle(rs.getString(3));
 				cn.setContent(rs.getString(4));
-				cn.setNoticeTime(rs.getDate(5));
+				cn.setNoticeTime(rs.getTimestamp(5));
 				cn.setUserId(rs.getInt(6));
 				
 				list.add(cn);
