@@ -31,7 +31,7 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 			ps.setString(2, remind.getContent());
 			ps.setTimestamp(3, remind.getCreateTime());
 			ps.setByte(4, remind.getIdentifying());
-			ps.setByte(5, remind.getIsReceived());
+			ps.setBoolean(5, remind.isReceived());
 			
 			ps.executeUpdate();
 			return true;
@@ -155,7 +155,7 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 			ps.setString(2, remind.getContent());
 			ps.setTimestamp(3, remind.getCreateTime());
 			ps.setByte(4, remind.getIdentifying());
-			ps.setByte(5, remind.getIsReceived());
+			ps.setBoolean(5, remind.isReceived());
 			ps.setInt(6, remind.getId());
 			
 			if (ps.executeUpdate() <= 0) {
@@ -208,7 +208,7 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 				remind.setContent(rs.getString("content"));
 				remind.setIdentifying(rs.getByte("identifying"));
 				remind.setCreateTime(rs.getTimestamp("createTime"));
-				remind.setIsReceived(rs.getByte("isReceived"));
+				remind.setReceived(rs.getBoolean("isReceived"));
 				list.add(remind);
 			}
 			
@@ -260,7 +260,7 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 				remind.setContent(rs.getString("content"));
 				remind.setCreateTime(rs.getTimestamp("createTime"));
 				remind.setIdentifying(rs.getByte("identifying"));
-				remind.setIsReceived(rs.getByte("isReceived"));
+				remind.setReceived(rs.getBoolean("isReceived"));
 			}
 			
 			return remind;

@@ -2,6 +2,7 @@ package com.mlcss.dao.impl;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -24,10 +25,14 @@ public class UserDAOImpl implements UserDAO {
 
 	public boolean add(User user) {
 		boolean b=false;
+		Date date = new java.sql.Date(user.getCreateTime().getTime());
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="insert into users(name,password,email) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"') ";
+
+			String sql="insert into users(name,password,email,userIcon,createTime) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"','"+user.getUserIcon()+"','"+date+"') ";
+
+			
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -38,28 +43,9 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
 		return b;
-	}
-
-	private void close() {
-		try{
-			if(rs!=null){
-			   rs.close();
-			   rs=null;
-			}
-			if(ps!=null){
-	           ps.close();
-	           rs=null;
-			}
-			if(conn!=null){
-	           conn.close();
-	           rs=null;
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	public boolean delete(Serializable bean) {
@@ -77,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
 		return b;
 	}
@@ -87,7 +73,9 @@ public class UserDAOImpl implements UserDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"' where id='"+user.getId()+"'";
+
+			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"',userIcon='"+user.getUserIcon()+"' where id='"+user.getId()+"'";
+
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -97,21 +85,40 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
 		return b;
 	}
 
 	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		User u = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from users where id = '" + id + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				u = new User();		
+				u.setId(rs.getInt(1));
+				u.setName(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setEmail(rs.getString(4));
+				u.setCreateTime(rs.getDate(6));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return u;	
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<User> listAll() {
 		
-		@SuppressWarnings("rawtypes")
-		List list = new ArrayList();
+		List<User> list = new ArrayList<User>();
+
 		conn = DBUtil.getConnection();
 		String sql = "select * from users";
 		
@@ -124,6 +131,7 @@ public class UserDAOImpl implements UserDAO {
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
+				u.setCreateTime(rs.getDate(6));
 				
 				list.add(u);
 			}
@@ -131,16 +139,10 @@ public class UserDAOImpl implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
 		return list;	
 	}
-
-	public List<User> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 	public User findByEmail(String email) {
 		
@@ -157,14 +159,20 @@ public class UserDAOImpl implements UserDAO {
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
+				u.setCreateTime(rs.getDate(6));
 			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
 		return u;	
+	}
+
+	public List<User> findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

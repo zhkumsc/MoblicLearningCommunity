@@ -19,7 +19,7 @@ public class testCoursesChatRecordsDAO {
 		ccr.setUserId(1);
 		ccr.setContent("abc");
 		ccr.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		ccr.setIsReceived((byte)0);
+		ccr.setReceived(false);
 		ccrd.addChatRecord(ccr);
 
 	}
@@ -28,12 +28,12 @@ public class testCoursesChatRecordsDAO {
 	public void testUpdateChatRecord() {
 		CoursesChatRecordsDAO ccrd  = new CoursesChatRecordsDAOImpl();
 		CoursesChatRecords ccr = new CoursesChatRecords();
-		ccr.setId(9);
-		ccr.setCoursesId(2);
+		ccr.setId(1);
+		ccr.setCoursesId(1);
 		ccr.setUserId(2);
-		ccr.setContent("����");
+		ccr.setContent("ddd");
 		ccr.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		ccr.setIsReceived((byte)1);
+		ccr.setReceived(true);
 		ccrd.updateChatRecord(ccr);
 		
 	}

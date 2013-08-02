@@ -4,11 +4,8 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import net.sf.json.JSONObject;
-
 import org.junit.Test;
 
-import com.mlcss.bean.User;
 import com.mlcss.util.ServiceUtil;
 
 /**

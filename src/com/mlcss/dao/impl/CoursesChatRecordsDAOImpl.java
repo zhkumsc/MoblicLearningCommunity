@@ -30,7 +30,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			ps.setInt(2, record.getUserId());
 			ps.setString(3, record.getContent());
 			ps.setTimestamp(4, record.getCreateTime());
-			ps.setByte(5, record.getIsReceived());
+			ps.setBoolean(5, record.isReceived());
 			
 			ps.executeUpdate();
 			return true;
@@ -154,7 +154,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			ps.setInt(2, record.getUserId());
 			ps.setString(3, record.getContent());
 			ps.setTimestamp(4, record.getCreateTime());
-			ps.setByte(5, record.getIsReceived());
+			ps.setBoolean(5, record.isReceived());
 			ps.setInt(6, record.getId());
 			
 			if (ps.executeUpdate() <= 0) {
@@ -207,7 +207,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				ccr.setUserId(rs.getInt("userId"));
 				ccr.setContent(rs.getString("content"));
 				ccr.setCreateTime(rs.getTimestamp("createTime"));
-				ccr.setIsReceived(rs.getByte("isReceived"));
+				ccr.setReceived(rs.getBoolean("isReceived"));
 				list.add(ccr);
 			}
 			
@@ -259,7 +259,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				ccr.setUserId(rs.getInt("userId"));
 				ccr.setContent(rs.getString("content"));
 				ccr.setCreateTime(rs.getTimestamp("createTime"));
-				ccr.setIsReceived(rs.getByte("isReceived"));
+				ccr.setReceived(rs.getBoolean("isReceived"));
 			}
 			
 			return ccr;

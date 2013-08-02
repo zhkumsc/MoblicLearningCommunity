@@ -1,5 +1,6 @@
 package com.mlcss.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -8,7 +9,7 @@ import java.sql.Timestamp;
  * @author Administrator
  * 
  */
-public class SystemMessages {
+public class SystemMessages implements Serializable {
 	/*
 	 * CREATE TABLE `systemmessages` ( 
 	 * `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -26,7 +27,7 @@ public class SystemMessages {
 	private int receiverId;
 	private String content;
 	private Timestamp createTime;
-	private byte isReceived;
+	private boolean isReceived;
 	public int getId() {
 		return id;
 	}
@@ -51,10 +52,11 @@ public class SystemMessages {
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
-	public byte getIsReceived() {
+	
+	public boolean isReceived() {
 		return isReceived;
 	}
-	public void setIsReceived(byte isReceived) {
+	public void setReceived(boolean isReceived) {
 		this.isReceived = isReceived;
 	}
 	@Override
