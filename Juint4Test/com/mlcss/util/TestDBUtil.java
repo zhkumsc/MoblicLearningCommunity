@@ -21,7 +21,9 @@ public class TestDBUtil {
 		if(rs.next()){
 			System.out.println(rs.getInt(1));
 		}
+		
+		System.out.println("用来展示冲突");
 	}
 	
-	System.out.println("用来展示冲突");
+
 }
