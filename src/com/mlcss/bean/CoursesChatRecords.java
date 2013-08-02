@@ -33,7 +33,7 @@ public class CoursesChatRecords implements Serializable {
 	private int userId;
 	private String content;
 	private Timestamp createTime;
-	private byte isReceived;
+	private boolean isReceived;
 	
 	public int getId() {
 		return id;
@@ -60,14 +60,15 @@ public class CoursesChatRecords implements Serializable {
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
 	}
-	public byte getIsReceived() {
+	
+	
+	
+	public boolean isReceived() {
 		return isReceived;
 	}
-	public void setIsReceived(byte isReceived) {
+	public void setReceived(boolean isReceived) {
 		this.isReceived = isReceived;
 	}
-	
-	
 	public int getCoursesId() {
 		return coursesId;
 	}

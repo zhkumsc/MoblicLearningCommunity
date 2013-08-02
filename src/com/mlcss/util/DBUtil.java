@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+
 
 /**
  * 数据库连接
@@ -16,6 +18,7 @@ public class DBUtil {
 	private static String url = null;
 	private static String username = null;
 	private static String password = null;
+	private static MysqlConnectionPoolDataSource connectionPool;
 
 	
 	/**
@@ -23,6 +26,7 @@ public class DBUtil {
 	 */
 	static {
 		Properties pro = new Properties();
+		connectionPool = new MysqlConnectionPoolDataSource();
 		try {
 			pro.load(DBUtil.class.getClassLoader().getResourceAsStream("dbinfo.properties"));
 			url = pro.getProperty("url");
@@ -47,7 +51,6 @@ public class DBUtil {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			conn = DriverManager.getConnection(url, username, password);
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

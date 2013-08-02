@@ -20,7 +20,7 @@ public class testRemindUserDAO {
 		ru.setContent("提醒!");
 		ru.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		ru.setIdentifying((byte)0);
-		ru.setIsReceived((byte)0);
+		ru.setReceived(false);
 		rud.addRemind(ru);
 	}
 	
@@ -40,12 +40,12 @@ public class testRemindUserDAO {
 	public void testUpdateRemind() {
 		RemindUserDAO rud = new RemindUserDAOImpl();
 		RemindUser ru = new RemindUser();
-		ru.setId(6);
+		ru.setId(10);
 		ru.setReceiverId(2);
 		ru.setContent("提醒2!");
 		ru.setCreateTime(new Timestamp(System.currentTimeMillis()));
 		ru.setIdentifying((byte)1);
-		ru.setIsReceived((byte)1);
+		ru.setReceived(true);
 		rud.updateRemind(ru);
 		
 	}

@@ -29,7 +29,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 			ps.setInt(1, msg.getReceiverId());
 			ps.setString(2, msg.getContent());
 			ps.setTimestamp(3, msg.getCreateTime());
-			ps.setByte(4, msg.getIsReceived());
+			ps.setBoolean(4, msg.isReceived());
 			
 			ps.executeUpdate();
 			return true;
@@ -152,7 +152,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 			ps.setInt(1, msg.getReceiverId());
 			ps.setString(2, msg.getContent());
 			ps.setTimestamp(3, msg.getCreateTime());
-			ps.setByte(4, msg.getIsReceived());
+			ps.setBoolean(4, msg.isReceived());
 			ps.setInt(5, msg.getId());
 			
 			if (ps.executeUpdate() <= 0) {
@@ -204,7 +204,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 				sm.setReceiverId(rs.getInt("receiverId"));
 				sm.setContent(rs.getString("content"));
 				sm.setCreateTime(rs.getTimestamp("createTime"));
-				sm.setIsReceived(rs.getByte("isReceived"));
+				sm.setReceived(rs.getBoolean("isReceived"));
 				list.add(sm);
 			}
 			
@@ -255,7 +255,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 				sm.setReceiverId(rs.getInt("receiverId"));
 				sm.setContent(rs.getString("content"));
 				sm.setCreateTime(rs.getTimestamp("createTime"));
-				sm.setIsReceived(rs.getByte("isReceived"));
+				sm.setReceived(rs.getBoolean("isReceived"));
 			}
 			
 			return sm;

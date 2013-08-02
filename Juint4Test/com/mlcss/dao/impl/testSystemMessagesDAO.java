@@ -18,7 +18,7 @@ public class testSystemMessagesDAO {
 		sm.setReceiverId(1);
 		sm.setContent("hello");
 		sm.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		sm.setIsReceived((byte)0);
+		sm.setReceived(true);
 		smd.addMessage(sm);
 	}
 	
@@ -38,11 +38,11 @@ public class testSystemMessagesDAO {
 	public void testUpdateMessage() {
 		SystemMessagesDAO smd = new SystemMessagesDAOImpl();
 		SystemMessages sm = new SystemMessages();
-		sm.setReceiverId(2);
+		sm.setReceiverId(1);
 		sm.setContent("hello world");
 		sm.setCreateTime(new Timestamp(System.currentTimeMillis()));
-		sm.setIsReceived((byte)1);
-		sm.setId(6);
+		sm.setReceived(false);
+		sm.setId(1);
 		smd.updateMessage(sm);
 		
 	}

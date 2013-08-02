@@ -1,5 +1,6 @@
 package com.mlcss.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
@@ -9,7 +10,7 @@ import java.sql.Timestamp;
  * @author fantasy
  * 
  */
-public class RemindUser {
+public class RemindUser implements Serializable {
 	/*
 	 * CREATE TABLE `reminduser` ( 
 	 * `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -29,7 +30,7 @@ public class RemindUser {
 	private String content;
 	private Timestamp createTime;
 	private byte identifying;		// 备忘提醒为1，课程提醒为0
-	private byte isReceived;	
+	private boolean isReceived;	
 	
 	public int getId() {
 		return id;
@@ -62,10 +63,11 @@ public class RemindUser {
 		this.identifying = identifying;
 	}
 
-	public byte getIsReceived() {
+	
+	public boolean isReceived() {
 		return isReceived;
 	}
-	public void setIsReceived(byte isReceived) {
+	public void setReceived(boolean isReceived) {
 		this.isReceived = isReceived;
 	}
 	@Override
