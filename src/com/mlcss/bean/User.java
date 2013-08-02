@@ -1,18 +1,47 @@
 package com.mlcss.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
+@SuppressWarnings("serial")
 public class User implements Serializable{
 
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String password;
 	private String email;
+	private String userIcon;
+	private Date createTime;
 	
 	
-	
-	
+	public String getUserIcon() {
+		return userIcon;
+	}
+
+
+
+
+	public void setUserIcon(String userIcon) {
+		this.userIcon = userIcon;
+	}
+
+
+
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+
+
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}

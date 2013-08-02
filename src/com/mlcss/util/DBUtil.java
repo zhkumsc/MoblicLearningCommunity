@@ -1,8 +1,10 @@
-package com.mlcss.dao;
+package com.mlcss.util;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 
@@ -12,19 +14,21 @@ import java.util.Properties;
  * @author fantasy
  *
  */
-public class DBConnection {
+public class DBUtil {
 	private static String url = null;
 	private static String username = null;
 	private static String password = null;
 
-	
+	private static Connection conn=null;
+	private static	PreparedStatement ps=null;
+	private static ResultSet rs=null;
 	/**
 	 *  通过配置文件初始化
 	 */
 	static {
 		Properties pro = new Properties();
 		try {
-			pro.load(DBConnection.class.getClassLoader().getResourceAsStream("dbinfo.properties"));
+			pro.load(DBUtil.class.getClassLoader().getResourceAsStream("dbinfo.properties"));
 			url = pro.getProperty("url");
 			username = pro.getProperty("username");
 			password = pro.getProperty("password");
@@ -54,4 +58,22 @@ public class DBConnection {
 		return conn; 
 	}
 
+	public static void close() {
+		try{
+			if(rs!=null){
+			   rs.close();
+			   rs=null;
+			}
+			if(ps!=null){
+	           ps.close();
+	           rs=null;
+			}
+			if(conn!=null){
+	           conn.close();
+	           rs=null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 }
