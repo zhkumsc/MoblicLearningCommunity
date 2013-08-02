@@ -29,7 +29,10 @@ public class UserDAOImpl implements UserDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
+
 			String sql="insert into users(name,password,email,userIcon,createTime) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"','"+user.getUserIcon()+"','"+date+"') ";
+
+			
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -70,7 +73,9 @@ public class UserDAOImpl implements UserDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
+
 			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"',userIcon='"+user.getUserIcon()+"' where id='"+user.getId()+"'";
+
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -113,6 +118,7 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> listAll() {
 		
 		List<User> list = new ArrayList<User>();
+
 		conn = DBUtil.getConnection();
 		String sql = "select * from users";
 		
