@@ -22,4 +22,6 @@ public class TestDBUtil {
 			System.out.println(rs.getInt(1));
 		}
 	}
+	
+	System.out.println("用来展示冲突");
 }
