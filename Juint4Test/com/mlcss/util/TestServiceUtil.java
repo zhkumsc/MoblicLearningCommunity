@@ -1,12 +1,6 @@
 package com.mlcss.util;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import org.junit.Test;
-
-import sun.misc.BASE64Encoder;
-
 
 public class TestServiceUtil {
 
