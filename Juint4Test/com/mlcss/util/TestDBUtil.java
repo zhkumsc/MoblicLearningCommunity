@@ -23,6 +23,7 @@ public class TestDBUtil {
 		}
 		System.out.println("两边同时修改了，整合是应该会冲突！");
 	}
+
 	
-	System.out.println("用来展示冲突");
+
 }
