@@ -12,6 +12,51 @@
 		<servlet-name>UserRegister</servlet-name>
 		<servlet-class>com.mlcss.servlet.user.UserRegister</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>MessageSend4Course</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageSend4Course</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageGet4Course</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageGet4Course</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageSend4Friend</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageSend4Friend</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageSend4FriendGroup</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageSend4FriendGroup</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageGet4Friend</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageGet4Friend</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageGet4FriendGroup</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageGet4FriendGroup</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageSendCourseNotice</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageSendCourseNotice</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageGetCourseNotice</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageGetCourseNotice</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MessageGetSystem</servlet-name>
+    <servlet-class>com.mlcss.servlet.message.MessageGetSystem</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
 	
 	<servlet-mapping>
 		<servlet-name>UserLogin</servlet-name>
@@ -21,6 +66,42 @@
 		<servlet-name>UserRegister</servlet-name>
 		<url-pattern>/UserRegister</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageSend4Course</servlet-name>
+    <url-pattern>/service/MessageSend4Course</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageGet4Course</servlet-name>
+    <url-pattern>/servlet/MessageGet4Course</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageSend4Friend</servlet-name>
+    <url-pattern>/servlet/MessageSend4Friend</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageSend4FriendGroup</servlet-name>
+    <url-pattern>/servlet/MessageSend4FriendGroup</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageGet4Friend</servlet-name>
+    <url-pattern>/servlet/MessageGet4Friend</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageGet4FriendGroup</servlet-name>
+    <url-pattern>/servlet/MessageGet4FriendGroup</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageSendCourseNotice</servlet-name>
+    <url-pattern>/servlet/MessageSendCourseNotice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageGetCourseNotice</servlet-name>
+    <url-pattern>/servlet/MessageGetCourseNotice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageGetSystem</servlet-name>
+    <url-pattern>/servlet/MessageGetSystem</url-pattern>
+  </servlet-mapping>
 	
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
