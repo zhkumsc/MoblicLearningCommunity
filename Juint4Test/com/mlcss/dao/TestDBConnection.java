@@ -2,7 +2,7 @@ package com.mlcss.dao;
 
 import org.junit.Test;
 
-import com.mlcss.dao.DBConnection;
+import com.mlcss.util.DBUtil;
 
 /**
  * 用于测试DBConnection的单元测试类
@@ -13,7 +13,7 @@ public class TestDBConnection {
 	
 	@Test
 	public void tetsDBConnection() {
-		DBConnection.getConnection();
+		DBUtil.getConnection();
 	}
 }
 

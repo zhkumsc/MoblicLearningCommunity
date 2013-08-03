@@ -32,7 +32,7 @@ System.out.println("CheckLoginFilter");
 
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
-		
+		//httpSession获取session
 		HttpSession session = httpRequest.getSession(false);
 		if(session == null) {
 			session = httpRequest.getSession();
