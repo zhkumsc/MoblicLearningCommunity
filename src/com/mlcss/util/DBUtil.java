@@ -38,7 +38,7 @@ public class DBUtil {
 			password = pro.getProperty("password");
 			
 //System.out.println(url);
-//System.out.println(username);
+//System.out.pbrintln(username);
 //System.out.println(password);
 		} catch (IOException e) {
 			throw new RuntimeException(e);

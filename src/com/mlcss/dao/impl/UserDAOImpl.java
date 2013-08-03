@@ -30,6 +30,7 @@ public class UserDAOImpl implements UserDAO {
 			//得到链接
 			conn=DBUtil.getConnection();
 
+
 			String sql="insert into users(name,password,email,userIcon,createTime) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"','"+user.getUserIcon()+"','"+date+"') ";
 
 			
@@ -116,6 +117,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public List<User> listAll() {
+
 		
 		List<User> list = new ArrayList<User>();
 
