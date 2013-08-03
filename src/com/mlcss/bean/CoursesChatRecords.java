@@ -31,8 +31,9 @@ public class CoursesChatRecords implements Serializable {
 	private int id;
 	private int coursesId;
 	private int userId;
+	private int sendId;
 	private String content;
-	private Timestamp createTime;
+	private String createTime;
 	private boolean isReceived;
 	
 	public int getId() {
@@ -54,15 +55,22 @@ public class CoursesChatRecords implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getCreateTime() {
+	
+	
+	
+	
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
-	
-	
+	public int getSendId() {
+		return sendId;
+	}
+	public void setSendId(int sendId) {
+		this.sendId = sendId;
+	}
 	public boolean isReceived() {
 		return isReceived;
 	}
@@ -77,11 +85,12 @@ public class CoursesChatRecords implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "CoursesChatRecords [id=" + id + ", courseId=" + coursesId
-				+ ", userId=" + userId + ", content=" + content
-				+ ", createTime=" + createTime + ", isReceived=" + isReceived
-				+ "]";
+		return "CoursesChatRecords [id=" + id + ", coursesId=" + coursesId
+				+ ", userId=" + userId + ", sendId=" + sendId + ", content="
+				+ content + ", createTime=" + createTime + ", isReceived="
+				+ isReceived + "]";
 	}
+	
 	
 	
 	

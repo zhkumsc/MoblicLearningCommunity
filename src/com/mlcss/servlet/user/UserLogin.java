@@ -40,8 +40,12 @@ public class UserLogin extends HttpServlet {
 		
 System.out.println("email:" + email + "\n" + "password:" + password);
 
-		if(logByEmail(email, password)) {
+		User user = null; 
+		if((user = logByEmail(email, password)) != null) {
 			session.setAttribute("logState", "1");
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("password", user.getPassword());
+			session.setAttribute("userId", user.getId());
 		} else {
 			session.setAttribute("logState", "0");
 			response.setStatus(400);
@@ -57,12 +61,12 @@ System.out.println("email:" + email + "\n" + "password:" + password);
 	 * @param password	登陆密码
 	 * @return
 	 */
-	private boolean logByEmail(String email, String password) {
+	private User logByEmail(String email, String password) {
 		User user = userDAO.findByEmail(email);
 		if(user != null && user.getPassword().equals(password)) {
-			return true;
+			return user;
 		}
-		return false;
+		return null;
 		
 		
 	}

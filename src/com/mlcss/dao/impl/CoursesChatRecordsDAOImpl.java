@@ -10,6 +10,7 @@ import java.util.List;
 import com.mlcss.bean.CoursesChatRecords;
 import com.mlcss.dao.CoursesChatRecordsDAO;
 import com.mlcss.util.DBUtil;
+import com.mlcss.util.DateTimeUtil;
 
 public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	
@@ -24,13 +25,14 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "insert into coursesChatRecords(coursesId, userId, content, createTime, isReceived) values(?,?,?,?,?)";
+			String sql = "insert into coursesChatRecords(coursesId, userId, content, createTime, isReceived, sendId) values(?,?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, record.getCoursesId());
 			ps.setInt(2, record.getUserId());
 			ps.setString(3, record.getContent());
-			ps.setTimestamp(4, record.getCreateTime());
+			ps.setTimestamp(4, DateTimeUtil.String2Date(record.getCreateTime()));
 			ps.setBoolean(5, record.isReceived());
+			ps.setInt(6, record.getSendId());
 			
 			ps.executeUpdate();
 			return true;
@@ -138,6 +140,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 		
 	}
 	
+	
 	/**
 	 * 更新某条记录
 	 * @param Record
@@ -148,14 +151,15 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "update coursesChatRecords set coursesId = ?, userId = ?, content = ?, createTime = ?, isReceived = ? where id = ?";
+			String sql = "update coursesChatRecords set coursesId = ?, userId = ?, content = ?, createTime = ?, isReceived = ?, sendId = ? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, record.getCoursesId());
 			ps.setInt(2, record.getUserId());
 			ps.setString(3, record.getContent());
-			ps.setTimestamp(4, record.getCreateTime());
+			ps.setTimestamp(4, DateTimeUtil.String2Date(record.getCreateTime()));
 			ps.setBoolean(5, record.isReceived());
-			ps.setInt(6, record.getId());
+			ps.setInt(6, record.getSendId());
+			ps.setInt(7, record.getId());
 			
 			if (ps.executeUpdate() <= 0) {
 				return false;
@@ -205,8 +209,9 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				ccr.setId(rs.getInt("id"));
 				ccr.setCoursesId(rs.getInt("coursesId"));
 				ccr.setUserId(rs.getInt("userId"));
+				ccr.setSendId(rs.getInt("sendId"));
 				ccr.setContent(rs.getString("content"));
-				ccr.setCreateTime(rs.getTimestamp("createTime"));
+				ccr.setCreateTime(DateTimeUtil.date2String(rs.getTimestamp("createTime")));
 				ccr.setReceived(rs.getBoolean("isReceived"));
 				list.add(ccr);
 			}
@@ -257,8 +262,9 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				ccr.setId(rs.getInt("id"));
 				ccr.setCoursesId(rs.getInt("coursesId"));
 				ccr.setUserId(rs.getInt("userId"));
+				ccr.setSendId(rs.getInt("sendId"));
 				ccr.setContent(rs.getString("content"));
-				ccr.setCreateTime(rs.getTimestamp("createTime"));
+				ccr.setCreateTime(DateTimeUtil.date2String(rs.getTimestamp("createTime")));
 				ccr.setReceived(rs.getBoolean("isReceived"));
 			}
 			
@@ -267,6 +273,146 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 		} catch (SQLException e) {			
 			e.printStackTrace();
 			return null;
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+		}
+		
+	}
+
+	/**
+	 * 返回某User所有的记录
+	 * @param userId 	用户id
+	 * @param received	false为取出未读消息，true为取出所有id
+	 * @return
+	 */
+	public List<CoursesChatRecords> getAllCoursesChatRecordsByUserId(
+			int userId, boolean received) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CoursesChatRecords> list = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = null;
+			if(received) {
+				sql = "select * from coursesChatRecords where userID=?";
+			} else {
+				sql = "select * from coursesChatRecords where userID=? And isReceived=0";
+			}
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			
+			rs = ps.executeQuery();
+			list = new ArrayList<CoursesChatRecords>();
+			while(rs.next()) {
+				CoursesChatRecords ccr = new CoursesChatRecords();
+				ccr.setId(rs.getInt("id"));
+				ccr.setCoursesId(rs.getInt("coursesId"));
+				ccr.setUserId(rs.getInt("userId"));
+				ccr.setSendId(rs.getInt("sendId"));
+				ccr.setContent(rs.getString("content"));
+				ccr.setCreateTime(DateTimeUtil.date2String(rs.getTimestamp("createTime")));
+				ccr.setReceived(rs.getBoolean("isReceived"));
+				list.add(ccr);
+			}
+			
+			return list;
+
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return null;
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}	
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public boolean setReceivedById(int id) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "update coursesChatRecords set isReceived = 1 where id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			if (ps.executeUpdate() <= 0) {
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+		}
+	}
+
+	public boolean setListReceived(List<CoursesChatRecords> list) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "update coursesChatRecords set isReceived = 1 where id = ?";
+			ps = conn.prepareStatement(sql);
+			for(CoursesChatRecords ccr : list) {
+				ps.setInt(1, ccr.getId());
+				ps.addBatch();
+				
+			}
+
+			if (ps.executeBatch() == null) {
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			return false;
 		} finally {
 			if(ps != null) {
 				try {

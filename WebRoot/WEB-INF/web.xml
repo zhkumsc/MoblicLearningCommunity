@@ -72,35 +72,35 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageGet4Course</servlet-name>
-    <url-pattern>/servlet/MessageGet4Course</url-pattern>
+    <url-pattern>/service/MessageGet4Course</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageSend4Friend</servlet-name>
-    <url-pattern>/servlet/MessageSend4Friend</url-pattern>
+    <url-pattern>/service/MessageSend4Friend</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageSend4FriendGroup</servlet-name>
-    <url-pattern>/servlet/MessageSend4FriendGroup</url-pattern>
+    <url-pattern>/service/MessageSend4FriendGroup</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageGet4Friend</servlet-name>
-    <url-pattern>/servlet/MessageGet4Friend</url-pattern>
+    <url-pattern>/service/MessageGet4Friend</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageGet4FriendGroup</servlet-name>
-    <url-pattern>/servlet/MessageGet4FriendGroup</url-pattern>
+    <url-pattern>/service/MessageGet4FriendGroup</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageSendCourseNotice</servlet-name>
-    <url-pattern>/servlet/MessageSendCourseNotice</url-pattern>
+    <url-pattern>/service/MessageSendCourseNotice</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageGetCourseNotice</servlet-name>
-    <url-pattern>/servlet/MessageGetCourseNotice</url-pattern>
+    <url-pattern>/service/MessageGetCourseNotice</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>MessageGetSystem</servlet-name>
-    <url-pattern>/servlet/MessageGetSystem</url-pattern>
+    <url-pattern>/service/MessageGetSystem</url-pattern>
   </servlet-mapping>
 	
 	<filter>
@@ -111,19 +111,19 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
-	<filter>
+<!-- 	<filter>
 		<filter-name>CheckLoginFilter</filter-name>
 		<filter-class>com.mlcss.servlet.filter.CheckLoginFilter</filter-class>
-	</filter>
+	</filter> -->
 
 
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
+<!-- 	<filter-mapping>
 		<filter-name>CheckLoginFilter</filter-name>
 		<url-pattern>/service/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 </web-app>

@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.mlcss.bean.CoursesChatRecords;
 import com.mlcss.dao.CoursesChatRecordsDAO;
 import com.mlcss.dao.impl.CoursesChatRecordsDAOImpl;
+import com.mlcss.util.DateTimeUtil;
 
 public class testCoursesChatRecordsDAO {
 
@@ -18,7 +19,7 @@ public class testCoursesChatRecordsDAO {
 		ccr.setCoursesId(1);
 		ccr.setUserId(1);
 		ccr.setContent("abc");
-		ccr.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		ccr.setCreateTime(DateTimeUtil.date2String(new Timestamp(System.currentTimeMillis())));
 		ccr.setReceived(false);
 		ccrd.addChatRecord(ccr);
 
@@ -32,7 +33,7 @@ public class testCoursesChatRecordsDAO {
 		ccr.setCoursesId(1);
 		ccr.setUserId(2);
 		ccr.setContent("ddd");
-		ccr.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		ccr.setCreateTime(DateTimeUtil.date2String(new Timestamp(System.currentTimeMillis())));
 		ccr.setReceived(true);
 		ccrd.updateChatRecord(ccr);
 		

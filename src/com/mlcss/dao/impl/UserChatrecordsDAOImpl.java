@@ -11,6 +11,7 @@ import com.mlcss.bean.UserChatrecords;
 import com.mlcss.bean.UserNotes;
 import com.mlcss.dao.UserChatrecordsDAO;
 import com.mlcss.util.DBUtil;
+import com.mlcss.util.DateTimeUtil;
 
 public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 	private Connection conn=null;
@@ -28,7 +29,7 @@ public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 			ps.setInt(1,chatrecords.getUserid() );
 			ps.setInt(2, chatrecords.getFriendid());
 			ps.setString(3, chatrecords.getContent());
-			ps.setTimestamp(4,  new Timestamp(System.currentTimeMillis()));
+			ps.setTimestamp(4,  DateTimeUtil.String2Date(chatrecords.getCreatetime()));
 			int num=ps.executeUpdate();
 			if(num==1){ 
 				System.out.println("添加成功");
@@ -76,7 +77,7 @@ public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 			while(rs.next()){
 				UserChatrecords k=new UserChatrecords();
 			k.setContent(rs.getString(4));
-			k.setCreatetime(rs.getTimestamp(5));
+			k.setCreatetime(DateTimeUtil.date2String(rs.getTimestamp(5)));
 			k.setId(rs.getInt(1));
 			k.setIsrceived(rs.getBoolean(6));
 			k.setFriendid(rs.getInt(3));
@@ -130,6 +131,70 @@ public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 			this.close();
 		}
 		return b;	
+	}
+
+	/**
+	 * 得到某朋友的所有消息
+	 * 参数reveived true为取出所有消息，false为取出未读消息
+	 */
+	public List<UserChatrecords> getAllFriendChatRecordsByUserId(int userId,
+			boolean reveived) {
+		List<UserChatrecords> list=new ArrayList<UserChatrecords>();
+		try{
+			//得到链接
+			conn=DBUtil.getConnection();
+			String sql;
+			if(reveived) {
+				sql="select * from userchatrecords where userId="+userId;
+			} else {
+				sql="select * from userchatrecords where userId="+userId+" and isReceived=0";
+			}
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				UserChatrecords k=new UserChatrecords();
+				k.setContent(rs.getString(4));
+				k.setCreatetime(DateTimeUtil.date2String(rs.getTimestamp(5)));
+				k.setId(rs.getInt(1));
+				k.setIsrceived(rs.getBoolean(6));
+				k.setFriendid(rs.getInt(3));
+				k.setUserid(rs.getInt(2));
+				list.add(k);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			this.close();
+		}
+		return list;
+	}
+
+	public boolean setListReceived(List<UserChatrecords> list) {
+		boolean b=false;
+		try{
+			//得到链接
+			
+			conn=DBUtil.getConnection();
+			String sql="update userchatrecords set isReceived=? where id=?";
+			ps=conn.prepareStatement(sql);
+			for(UserChatrecords u : list) {
+				ps.setBoolean(1, true);
+				ps.setInt(2, u.getId());
+				ps.addBatch();
+				
+			}
+			int[] num = ps.executeBatch();
+			if(num!=null){ 
+				//修改成功！
+				b=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			this.close();
+		}
+		return b;
+		
 	}
 
 }

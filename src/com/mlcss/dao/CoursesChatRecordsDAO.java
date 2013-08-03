@@ -50,5 +50,28 @@ public interface CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public abstract CoursesChatRecords getCoursesChatRecordsById(int id);
+	
+	/**
+	 * 返回某User所有的记录
+	 * @param userId 	用户id
+	 * @param received	false为取出未读消息，true为取出所有id
+	 * @return
+	 */
+	public abstract List<CoursesChatRecords> getAllCoursesChatRecordsByUserId(
+			int userId, boolean received);
+	
+	/**
+	 * 设置指定信息为已读
+	 * @param id
+	 * @return
+	 */
+	public abstract boolean setReceivedById(int id);
+
+	
+	/**
+	 * 批量设置已读
+	 * @param list
+	 */
+	public abstract boolean setListReceived(List<CoursesChatRecords> list);
 
 }

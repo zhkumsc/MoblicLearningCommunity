@@ -8,7 +8,7 @@ public class UserChatrecords {
 	private int userid;
 	private int friendid;
 	private String content;
-	private Timestamp createtime;
+	private String createtime;
 	public int getId() {
 		return id;
 	}
@@ -33,10 +33,11 @@ public class UserChatrecords {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getCreatetime() {
+	
+	public String getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(Timestamp createtime) {
+	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
 	}
 	public boolean isIsrceived() {
@@ -46,5 +47,12 @@ public class UserChatrecords {
 		this.isrceived = isrceived;
 	}
 	private boolean isrceived;
+	@Override
+	public String toString() {
+		return "UserChatrecords [id=" + id + ", userid=" + userid
+				+ ", friendid=" + friendid + ", content=" + content
+				+ ", createtime=" + createtime + ", isrceived=" + isrceived
+				+ "]";
+	}
 
 }
