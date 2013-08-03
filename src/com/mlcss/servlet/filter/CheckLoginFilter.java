@@ -1,6 +1,5 @@
 package com.mlcss.servlet.filter;
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -32,7 +31,7 @@ System.out.println("CheckLoginFilter");
 
 		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		HttpServletResponse httpResponse = (HttpServletResponse)response;
-		
+		//httpSession获取session
 		HttpSession session = httpRequest.getSession(false);
 		if(session == null) {
 			session = httpRequest.getSession();
