@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
-
 import net.sf.json.JSONObject;
 
 import com.mlcss.bean.User;
 import com.mlcss.dao.UserDAO;
 import com.mlcss.dao.impl.UserDAOImpl;
 
+@SuppressWarnings("serial")
 public class UserRegister extends HttpServlet {
 	
 	private UserDAO userDAO = new UserDAOImpl();
@@ -32,7 +31,8 @@ public class UserRegister extends HttpServlet {
 			throws ServletException, IOException {	
 		String userJsonString = request.getParameter("json");
 System.out.println(userJsonString);
-		JSONObject o = JSONObject.fromObject(userJsonString);
+		JSONObject o;
+		o = JSONObject.fromObject(userJsonString);
 		User u = (User)JSONObject.toBean(o, User.class);
 		resgiter(response, u);	
 	}

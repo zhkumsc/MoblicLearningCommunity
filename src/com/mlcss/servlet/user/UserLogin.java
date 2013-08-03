@@ -1,9 +1,12 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+
+/**
+ * 登陆Servlet
+ */
 import java.io.PrintWriter;
 
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import com.mlcss.bean.User;
 import com.mlcss.dao.UserDAO;
 import com.mlcss.dao.impl.UserDAOImpl;
-import com.mlcss.util.ServiceUtil;
 
+@SuppressWarnings("serial")
 public class UserLogin extends HttpServlet {
 	
 	private UserDAO userDAO = new UserDAOImpl();
