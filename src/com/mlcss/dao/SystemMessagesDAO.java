@@ -41,8 +41,7 @@ public interface SystemMessagesDAO {
 	 * @param courseId
 	 * @return
 	 */
-	public abstract List<SystemMessages> getAllMessageByReceiverId(
-			int receiverId);
+	public abstract List<SystemMessages> getAllMessageByReceiverId(int receiverId, boolean received);
 
 	/**
 	 * 返回某条记录
@@ -50,5 +49,9 @@ public interface SystemMessagesDAO {
 	 * @return
 	 */
 	public abstract SystemMessages getMessageById(int id);
+
+	public abstract boolean setListReceived(List<SystemMessages> list);
+
+
 
 }

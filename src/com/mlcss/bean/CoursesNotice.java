@@ -7,8 +7,17 @@ public class CoursesNotice {
 	private int coursesId;
 	private String noticeTitle;
 	private String content;
-	private Timestamp noticeTime;
+	private String noticeTime;
 	private int userId;
+	private boolean isReceived ;
+	
+
+	public boolean isReceived() {
+		return isReceived;
+	}
+	public void setReceived(boolean isReceived) {
+		this.isReceived = isReceived;
+	}
 	public int getId() {
 		return id;
 	}
@@ -33,10 +42,11 @@ public class CoursesNotice {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getNoticeTime() {
+	
+	public String getNoticeTime() {
 		return noticeTime;
 	}
-	public void setNoticeTime(Timestamp noticeTime) {
+	public void setNoticeTime(String noticeTime) {
 		this.noticeTime = noticeTime;
 	}
 	public int getUserId() {
@@ -45,4 +55,13 @@ public class CoursesNotice {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	@Override
+	public String toString() {
+		return "CoursesNotice [id=" + id + ", coursesId=" + coursesId
+				+ ", noticeTitle=" + noticeTitle + ", content=" + content
+				+ ", noticeTime=" + noticeTime + ", userId=" + userId
+				+ ", isReceived=" + isReceived + "]";
+	}
+	
+	
 }

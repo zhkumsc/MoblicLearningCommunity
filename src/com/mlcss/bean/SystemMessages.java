@@ -26,7 +26,7 @@ public class SystemMessages implements Serializable {
 	private int id;
 	private int receiverId;
 	private String content;
-	private Timestamp createTime;
+	private String createTime;
 	private boolean isReceived;
 	public int getId() {
 		return id;
@@ -46,13 +46,14 @@ public class SystemMessages implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getCreateTime() {
+	
+	
+	public String getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	
 	public boolean isReceived() {
 		return isReceived;
 	}

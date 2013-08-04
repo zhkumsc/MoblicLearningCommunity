@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mlcss.bean.CoursesChatRecords;
 import com.mlcss.bean.SystemMessages;
 import com.mlcss.dao.SystemMessagesDAO;
 import com.mlcss.util.DBUtil;
+import com.mlcss.util.DateTimeUtil;
 
 public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 	
@@ -28,7 +30,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, msg.getReceiverId());
 			ps.setString(2, msg.getContent());
-			ps.setTimestamp(3, msg.getCreateTime());
+			ps.setTimestamp(3, DateTimeUtil.String2Date(msg.getCreateTime()));
 			ps.setBoolean(4, msg.isReceived());
 			
 			ps.executeUpdate();
@@ -151,7 +153,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, msg.getReceiverId());
 			ps.setString(2, msg.getContent());
-			ps.setTimestamp(3, msg.getCreateTime());
+			ps.setTimestamp(3, DateTimeUtil.String2Date(msg.getCreateTime()));
 			ps.setBoolean(4, msg.isReceived());
 			ps.setInt(5, msg.getId());
 			
@@ -183,16 +185,22 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 	
 	/**
 	 * 返回某接受者所有记录
-	 * @param courseId
+	 * @param receiverId 	接受者id
+	 * @param received 		true为获取所有消息，false为获取未读消息
 	 * @return
 	 */
-	public List<SystemMessages> getAllMessageByReceiverId(int receiverId) {
+	public List<SystemMessages> getAllMessageByReceiverId(int receiverId, boolean received) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		List<SystemMessages> list = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "select * from systemmessages where receiverId=?";
+			String sql = null;
+			if(received) {
+				sql = "select * from systemmessages where receiverId=?";
+			} else {
+				sql = "select * from systemmessages where receiverId=? and isReceived=0";
+			}
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, receiverId);
 			
@@ -203,7 +211,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 				sm.setId(rs.getInt("id"));
 				sm.setReceiverId(rs.getInt("receiverId"));
 				sm.setContent(rs.getString("content"));
-				sm.setCreateTime(rs.getTimestamp("createTime"));
+				sm.setCreateTime(DateTimeUtil.date2String(rs.getTimestamp("createTime")));
 				sm.setReceived(rs.getBoolean("isReceived"));
 				list.add(sm);
 			}
@@ -254,7 +262,7 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 				sm.setId(rs.getInt("id"));
 				sm.setReceiverId(rs.getInt("receiverId"));
 				sm.setContent(rs.getString("content"));
-				sm.setCreateTime(rs.getTimestamp("createTime"));
+				sm.setCreateTime(DateTimeUtil.date2String(rs.getTimestamp("createTime")));
 				sm.setReceived(rs.getBoolean("isReceived"));
 			}
 			
@@ -273,6 +281,56 @@ public class SystemMessagesDAOImpl implements SystemMessagesDAO {
 			}		
 			if(conn != null) {
 				try {
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+		}
+		
+	}
+
+
+	public boolean setListReceived(List<SystemMessages> list) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			String sql = "update SystemMessages set isReceived = 1 where id = ?";
+			ps = conn.prepareStatement(sql);
+			for(SystemMessages sm : list) {
+				ps.setInt(1, sm.getId());
+				ps.addBatch();
+				
+			}
+
+			if (ps.executeBatch() == null) {
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {	
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(ps != null) {
+				try {
+					
+					ps.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+			if(conn != null) {
+				try {
+					conn.setAutoCommit(true);
 					conn.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();

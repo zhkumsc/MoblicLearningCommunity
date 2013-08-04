@@ -3,6 +3,7 @@ package com.mlcss.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,12 +170,16 @@ public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 		return list;
 	}
 
+	/**
+	 * 设置批量已接受
+	 */
 	public boolean setListReceived(List<UserChatrecords> list) {
 		boolean b=false;
 		try{
 			//得到链接
 			
 			conn=DBUtil.getConnection();
+			conn.setAutoCommit(false);
 			String sql="update userchatrecords set isReceived=? where id=?";
 			ps=conn.prepareStatement(sql);
 			for(UserChatrecords u : list) {
@@ -189,8 +194,23 @@ public class UserChatrecordsDAOImpl implements UserChatrecordsDAO{
 				b=true;
 			}
 		}catch(Exception e){
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
 			e.printStackTrace();
 		}finally{
+			if(conn != null) {
+				try {
+					conn.setAutoCommit(true);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
 			this.close();
 		}
 		return b;

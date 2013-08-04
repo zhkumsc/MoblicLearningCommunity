@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.mlcss.bean.CoursesChatRecords;
+import com.mlcss.bean.CoursesFollow;
 
 public interface CoursesChatRecordsDAO {
 
@@ -73,5 +74,13 @@ public interface CoursesChatRecordsDAO {
 	 * @param list
 	 */
 	public abstract boolean setListReceived(List<CoursesChatRecords> list);
+
+	/**
+	 * 发送到所有人
+	 * @param newCcr 
+	 * @param list
+	 * @return
+	 */
+	public abstract boolean addChatRecordToAll(CoursesChatRecords newCcr, List<CoursesFollow> list);
 
 }

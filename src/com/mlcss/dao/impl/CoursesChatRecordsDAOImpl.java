@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mlcss.bean.CoursesChatRecords;
+import com.mlcss.bean.CoursesFollow;
 import com.mlcss.dao.CoursesChatRecordsDAO;
 import com.mlcss.util.DBUtil;
 import com.mlcss.util.DateTimeUtil;
@@ -398,6 +399,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
 			String sql = "update coursesChatRecords set isReceived = 1 where id = ?";
 			ps = conn.prepareStatement(sql);
 			for(CoursesChatRecords ccr : list) {
@@ -410,12 +412,71 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				return false;
 			}
 			return true;
-		} catch (SQLException e) {			
+		} catch (SQLException e) {	
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
 			e.printStackTrace();
 			return false;
 		} finally {
 			if(ps != null) {
 				try {
+					ps.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+			if(conn != null) {
+				try {
+					conn.setAutoCommit(true);
+					conn.close();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}		
+		}
+		
+	}
+
+	public boolean addChatRecordToAll(CoursesChatRecords record, List<CoursesFollow> list) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		try {
+			conn = DBUtil.getConnection();
+			conn.setAutoCommit(false);
+			String sql = "insert into coursesChatRecords(coursesId, userId, content, createTime, isReceived, sendId) values(?,?,?,?,?,?)";
+			ps = conn.prepareStatement(sql);
+			for(CoursesFollow cf : list) {
+				record.setUserId(cf.getUserId());
+				ps.setInt(1, record.getCoursesId());
+				ps.setInt(2, record.getUserId());
+				ps.setString(3, record.getContent());
+				ps.setTimestamp(4, DateTimeUtil.String2Date(record.getCreateTime()));
+				ps.setBoolean(5, record.isReceived());
+				ps.setInt(6, record.getSendId());
+				ps.addBatch();
+			}
+			
+			ps.executeBatch();
+			return true;
+		} catch (SQLException e) {	
+			if(conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(ps != null) {
+				try {
+					conn.setAutoCommit(true);
 					ps.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -429,7 +490,6 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				}
 			}		
 		}
-		
 	}
 
 }
