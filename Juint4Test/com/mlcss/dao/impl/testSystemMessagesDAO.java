@@ -1,13 +1,14 @@
 package com.mlcss.dao.impl;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.mlcss.bean.SystemMessages;
 import com.mlcss.dao.SystemMessagesDAO;
-import com.mlcss.dao.impl.SystemMessagesDAOImpl;
+import com.mlcss.util.DateTimeUtil;
 
 public class testSystemMessagesDAO {
 
@@ -17,7 +18,7 @@ public class testSystemMessagesDAO {
 		SystemMessages sm = new SystemMessages();
 		sm.setReceiverId(1);
 		sm.setContent("hello");
-		sm.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		sm.setCreateTime(DateTimeUtil.date2String(new Date()));
 		sm.setReceived(true);
 		smd.addMessage(sm);
 	}
@@ -40,7 +41,7 @@ public class testSystemMessagesDAO {
 		SystemMessages sm = new SystemMessages();
 		sm.setReceiverId(1);
 		sm.setContent("hello world");
-		sm.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		sm.setCreateTime(DateTimeUtil.date2String(new Date()));
 		sm.setReceived(false);
 		sm.setId(1);
 		smd.updateMessage(sm);
@@ -50,7 +51,7 @@ public class testSystemMessagesDAO {
 	@Test
 	public void testGetAllsystemmessages() {
 		SystemMessagesDAO smd = new SystemMessagesDAOImpl();
-		List<SystemMessages> list = smd.getAllMessageByReceiverId(1);
+		List<SystemMessages> list = smd.getAllMessageByReceiverId(1, false);
 		for(SystemMessages sm : list) {
 			System.out.println(sm.toString());
 		}

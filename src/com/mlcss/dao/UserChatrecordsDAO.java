@@ -2,7 +2,6 @@ package com.mlcss.dao;
 
 import java.util.List;
 
-import com.mlcss.bean.CoursesChatRecords;
 import com.mlcss.bean.UserChatrecords;
 
 

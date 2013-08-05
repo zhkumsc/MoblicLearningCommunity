@@ -8,12 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mlcss.bean.CoursesChatRecords;
-import com.mlcss.bean.CoursesFollow;
 import com.mlcss.dao.CoursesChatRecordsDAO;
 import com.mlcss.util.DBUtil;
 import com.mlcss.util.DateTimeUtil;
 
 public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
+	
+	private Connection conn = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
 	
 	/**
 	 * 增加记录
@@ -22,8 +25,6 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @throws SQLException 
 	 */
 	public boolean addChatRecord(CoursesChatRecords record) {
-		Connection conn = null;
-		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "insert into coursesChatRecords(coursesId, userId, content, createTime, isReceived, sendId) values(?,?,?,?,?,?)";
@@ -41,20 +42,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();	
 		}
 			
 	}
@@ -65,8 +53,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public boolean delChatRecordById(int id) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "delete from coursesChatRecords where id=?";
@@ -82,20 +69,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();	
 		}
 		
 	}
@@ -106,8 +80,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public boolean delAllChatRecordByCourseId(int coursesId) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "delete from coursesChatRecords where coursesId=?";
@@ -123,20 +96,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();		
 		}
 		
 	}
@@ -148,8 +108,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public boolean updateChatRecord(CoursesChatRecords record) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "update coursesChatRecords set coursesId = ?, userId = ?, content = ?, createTime = ?, isReceived = ?, sendId = ? where id = ?";
@@ -170,20 +129,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();	
 		}
 		
 	}
@@ -194,8 +140,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public List<CoursesChatRecords> getAllCoursesChatRecords(int coursesId) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		List<CoursesChatRecords> list = null;
 		try {
 			conn = DBUtil.getConnection();
@@ -203,7 +148,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, coursesId);
 			
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			list = new ArrayList<CoursesChatRecords>();
 			while(rs.next()) {
 				CoursesChatRecords ccr = new CoursesChatRecords();
@@ -223,20 +168,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return list;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();	
 		}
 		
 	}
@@ -248,15 +180,14 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 * @return
 	 */
 	public CoursesChatRecords getCoursesChatRecordsById(int id) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+		
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "select * from coursesChatRecords where id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			CoursesChatRecords ccr = null;
 			while(rs.next()) {
 				ccr = new CoursesChatRecords();
@@ -275,23 +206,11 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return null;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();
 		}
 		
 	}
+
 
 	/**
 	 * 返回某User所有的记录
@@ -301,9 +220,7 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 	 */
 	public List<CoursesChatRecords> getAllCoursesChatRecordsByUserId(
 			int userId, boolean received) {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+
 		List<CoursesChatRecords> list = null;
 		try {
 			conn = DBUtil.getConnection();
@@ -336,33 +253,13 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return null;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}	
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			close();
 		}
 	}
 
+
 	public boolean setReceivedById(int id) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "update coursesChatRecords set isReceived = 1 where id = ?";
@@ -377,26 +274,12 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();		
 		}
 	}
 
 	public boolean setListReceived(List<CoursesChatRecords> list) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+
 		try {
 			conn = DBUtil.getConnection();
 			conn.setAutoCommit(false);
@@ -407,8 +290,9 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 				ps.addBatch();
 				
 			}
-
-			if (ps.executeBatch() == null) {
+			int[] line = ps.executeBatch();
+			conn.commit();
+			if (line == null) {
 				return false;
 			}
 			return true;
@@ -423,45 +307,39 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
-				try {
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
-			if(conn != null) {
-				try {
-					conn.setAutoCommit(true);
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			close();	
 		}
 		
 	}
 
-	public boolean addChatRecordToAll(CoursesChatRecords record, List<CoursesFollow> list) {
-		Connection conn = null;
-		PreparedStatement ps = null;
+	public boolean addChatRecordToAll(CoursesChatRecords record) {
+		PreparedStatement ps2 = null;
+		
 		try {
 			conn = DBUtil.getConnection();
 			conn.setAutoCommit(false);
 			String sql = "insert into coursesChatRecords(coursesId, userId, content, createTime, isReceived, sendId) values(?,?,?,?,?,?)";
+			String sql2 = "select userId from coursesfollow where coursesId=" + record.getCoursesId();
+			
 			ps = conn.prepareStatement(sql);
-			for(CoursesFollow cf : list) {
-				record.setUserId(cf.getUserId());
+			ps2 = conn.prepareStatement(sql2);
+			rs = ps2.executeQuery();
+			while(rs.next()) {
+				
+				record.setUserId(rs.getInt(1));
+				
 				ps.setInt(1, record.getCoursesId());
 				ps.setInt(2, record.getUserId());
 				ps.setString(3, record.getContent());
 				ps.setTimestamp(4, DateTimeUtil.String2Date(record.getCreateTime()));
 				ps.setBoolean(5, record.isReceived());
 				ps.setInt(6, record.getSendId());
+				
 				ps.addBatch();
 			}
 			
 			ps.executeBatch();
+			conn.commit();
 			return true;
 		} catch (SQLException e) {	
 			if(conn != null) {
@@ -474,22 +352,39 @@ public class CoursesChatRecordsDAOImpl implements CoursesChatRecordsDAO {
 			e.printStackTrace();
 			return false;
 		} finally {
-			if(ps != null) {
+			close();
+			if(ps2!= null) {
 				try {
-					conn.setAutoCommit(true);
-					ps.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
+					ps2.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-			}		
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}		
+			}
 		}
 	}
 
+	private void close() {
+		if(ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}		
+		if(conn != null) {
+			try {
+				conn.setAutoCommit(false);
+				conn.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}	
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

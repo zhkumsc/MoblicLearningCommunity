@@ -81,6 +81,6 @@ public interface CoursesChatRecordsDAO {
 	 * @param list
 	 * @return
 	 */
-	public abstract boolean addChatRecordToAll(CoursesChatRecords newCcr, List<CoursesFollow> list);
+	public abstract boolean addChatRecordToAll(CoursesChatRecords newCcr);
 
 }
