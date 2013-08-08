@@ -48,6 +48,69 @@
     <servlet-name>MessageGetSystem</servlet-name>
     <servlet-class>com.mlcss.servlet.message.MessageGetSystem</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteAdd</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.NoteAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.NoteDel</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteUpdate</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.NoteUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.NoteSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RemindAdd</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.RemindAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RemindDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.RemindDel</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RemindUpdate</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.RemindUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RemindSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.RemindSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteShare</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.NoteShare</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +164,42 @@
   <servlet-mapping>
     <servlet-name>MessageGetSystem</servlet-name>
     <url-pattern>/service/MessageGetSystem</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteAdd</servlet-name>
+    <url-pattern>/service/NoteAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteDel</servlet-name>
+    <url-pattern>/service/NoteDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteUpdate</servlet-name>
+    <url-pattern>/service/NoteUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteSelect</servlet-name>
+    <url-pattern>/service/NoteSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemindAdd</servlet-name>
+    <url-pattern>/service/RemindAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemindDel</servlet-name>
+    <url-pattern>/service/RemindDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemindUpdate</servlet-name>
+    <url-pattern>/service/RemindUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemindSelect</servlet-name>
+    <url-pattern>/service/RemindSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteShare</servlet-name>
+    <url-pattern>/service/NoteShare</url-pattern>
   </servlet-mapping>
 	
 	<filter>

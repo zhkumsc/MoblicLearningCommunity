@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, remind.getReceiverId());
 			ps.setString(2, remind.getContent());
-			ps.setTimestamp(3, remind.getCreateTime());
+			ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			ps.setByte(4, remind.getIdentifying());
 			ps.setBoolean(5, remind.isReceived());
 			
@@ -149,14 +150,14 @@ public class RemindUserDAOImpl implements RemindUserDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "update reminduser set receiverId = ?, content = ?, createTime = ?, identifying = ?, isReceived = ? where id = ?";
+			String sql = "update reminduser set receiverId = ?, content = ?,  identifying = ?, isReceived = ? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, remind.getReceiverId());
 			ps.setString(2, remind.getContent());
-			ps.setTimestamp(3, remind.getCreateTime());
-			ps.setByte(4, remind.getIdentifying());
-			ps.setBoolean(5, remind.isReceived());
-			ps.setInt(6, remind.getId());
+			
+			ps.setByte(3, remind.getIdentifying());
+			ps.setBoolean(4, remind.isReceived());
+			ps.setInt(5, remind.getId());
 			
 			if (ps.executeUpdate() <= 0) {
 				return false;
