@@ -62,4 +62,13 @@ public class UserDAOImplTest {
 		User u = udi.findByEmail("12323@qq.com");
 		System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime());
 	}
+	
+	@Test
+	public void testFindByName(){
+		UserDAOImpl udi = new UserDAOImpl();
+		List<User> list = udi.findByName("张三");
+		for(User u : list){
+			System.out.println(u);
+		}
+	}
 }

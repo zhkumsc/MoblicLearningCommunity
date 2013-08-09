@@ -114,6 +114,16 @@
     <servlet-name>FriendRename</servlet-name>
     <servlet-class>com.mlcss.servlet.user.FriendRename</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UserFriendList</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.UserFriendList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.UserSelect</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -222,6 +232,14 @@
   <servlet-mapping>
     <servlet-name>FriendRename</servlet-name>
     <url-pattern>/servlet/FriendRename</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserFriendList</servlet-name>
+    <url-pattern>/servlce/UserFriendList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserSelect</servlet-name>
+    <url-pattern>/servlce/UserSelect</url-pattern>
   </servlet-mapping>
 	
 	<filter>
