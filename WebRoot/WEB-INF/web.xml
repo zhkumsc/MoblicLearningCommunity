@@ -102,6 +102,20 @@
     <servlet-name>NoteShare</servlet-name>
     <servlet-class>com.mlcss.servlet.assistant.NoteShare</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>FriendGroupMove</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.FriendGroupMove</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>t</display-name>
+    <servlet-name>FriendRename</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.FriendRename</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -200,6 +214,14 @@
   <servlet-mapping>
     <servlet-name>NoteShare</servlet-name>
     <url-pattern>/service/NoteShare</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendGroupMove</servlet-name>
+    <url-pattern>/servlce/FriendGroupMove</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendRename</servlet-name>
+    <url-pattern>/servlet/FriendRename</url-pattern>
   </servlet-mapping>
 	
 	<filter>

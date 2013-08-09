@@ -8,6 +8,13 @@ public class UserRelShip {
 	private int friendId;
 	private int groupId;
 	private Timestamp createTime;
+	private String friendNote;
+	public String getFriendNote() {
+		return friendNote;
+	}
+	public void setFriendNote(String friendNote) {
+		this.friendNote = friendNote;
+	}
 	public int getId() {
 		return id;
 	}

@@ -31,13 +31,13 @@ public class testUserGroupsDAOImpl {
 		u.setUserid(10);
 		group.update(u);
 	}
-	@Test
+	/*@Test
 	public void testfindbyid(){
 		UserGroupsDAO group=new UserGroupsDAOImpl();
 		UserGroups u=new UserGroups();
 		u=group.findById(3);
 		System.out.println(u.getGroupname());
 		
-	}
+	}*/
 
 }
