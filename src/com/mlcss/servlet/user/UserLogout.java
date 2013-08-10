@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +21,13 @@ public class UserLogout extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		session.getAttribute("logState");
 		System.out.print(session.getId());
 		session.invalidate();
+		out.print("成功退出");
+		out.close();
 	}
 
 }

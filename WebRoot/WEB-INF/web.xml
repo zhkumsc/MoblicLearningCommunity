@@ -227,19 +227,19 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FriendGroupMove</servlet-name>
-    <url-pattern>/servlce/FriendGroupMove</url-pattern>
+    <url-pattern>/service/FriendGroupMove</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FriendRename</servlet-name>
-    <url-pattern>/servlet/FriendRename</url-pattern>
+    <url-pattern>/service/FriendRename</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UserFriendList</servlet-name>
-    <url-pattern>/servlce/UserFriendList</url-pattern>
+    <url-pattern>/service/UserFriendList</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UserSelect</servlet-name>
-    <url-pattern>/servlce/UserSelect</url-pattern>
+    <url-pattern>/service/UserSelect</url-pattern>
   </servlet-mapping>
 	
 	<filter>

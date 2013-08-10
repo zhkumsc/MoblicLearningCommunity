@@ -64,26 +64,6 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update usergroups set userId="+user.getUserid()+" ,groupName='"+user.getGroupname()+"' where id="+user.getId();
-			ps=conn.prepareStatement(sql);
-			int num=ps.executeUpdate();
-			if(num==1){ 
-				//修改成功！
-				b=true;
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			this.close();
-		}
-		return b;
-	}
-	
-	public boolean friendGroupMove(UserGroups user) {
-		boolean b=false;
-		try{
-			//得到链接
-			conn=DBUtil.getConnection();
 			String sql="update usergroups set groupName='"+user.getGroupname()+"' where id="+user.getId();
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
@@ -99,11 +79,10 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		return b;
 	}
 	
-
-	public List<UserGroups> listAll() {
+	public List<UserGroups> listAll(int userId) {
 		List<UserGroups> list = new ArrayList<UserGroups>();
 		conn = DBUtil.getConnection();
-        String sql = "select * from usergroups";
+        String sql = "select * from usergroups where userId='" + userId + "'";
 		
 		try{
 			ps = conn.prepareStatement(sql);
@@ -142,6 +121,53 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public UserGroups findById(int id) {
+		UserGroups ug = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from usergroups where id = '" + id + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				ug = new UserGroups();		
+				ug.setId(rs.getInt(1));
+				ug.setUserid(rs.getInt(2));
+				ug.setGroupname(rs.getString(3));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return ug;	
+	}
+
+	public UserGroups findFriendGroups(int userId, String groupName) {
+
+		UserGroups ug = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from usergroups where userId = '" + userId + "' and groupName = '" + groupName + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				ug = new UserGroups();		
+				ug.setId(rs.getInt(1));
+				ug.setUserid(rs.getInt(2));
+				ug.setGroupname(rs.getString(3));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return ug;	
 	}
 
 }

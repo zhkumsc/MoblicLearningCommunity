@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,7 @@ public class FriendGroupUpdate extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		System.out.println(userJson);
 		JSONObject o = JSONObject.fromObject(userJson);
@@ -30,10 +31,11 @@ public class FriendGroupUpdate extends HttpServlet {
 		
 		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
 		if(ugdi.update(ug)){
-			System.out.println("修改成功！");
+			out.print("修改成功！");
 		}else{
-		    System.out.println("修改失败！");	
+		    out.print("修改失败！");	
 		}
+		out.close();
 	}
 
 }

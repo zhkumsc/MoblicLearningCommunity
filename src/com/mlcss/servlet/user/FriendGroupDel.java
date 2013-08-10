@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class FriendGroupDel extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		System.out.println(userJson);
 		JSONObject o = JSONObject.fromObject(userJson);
@@ -32,11 +34,11 @@ public class FriendGroupDel extends HttpServlet {
 		
 		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
 		if(ugdi.delete(ug.getId())){
-			System.out.println("删除好友分组成功！");
+			out.print("删除好友分组成功！");
 		}else{
-			System.out.println("删除好友分组失败！");
+			out.print("删除好友分组失败！");
 		}
-		
+		out.close();
 	}
 
 }

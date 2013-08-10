@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,23 +26,30 @@ public class UserUpdate extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		System.out.println(userJson);
 		JSONObject o = JSONObject.fromObject(userJson);
-		User u = (User)JSONObject.toBean(o, User.class);
-		
-		if(u.getName()==null){
-			System.out.println("用户名不能为空！");
-		}
-		if(u.getPassword()==null){
-			System.out.println("密码不能为空！");
-		}
+		User u1 = (User)JSONObject.toBean(o, User.class);
 		
 		UserDAO dao = new UserDAOImpl();
-		if(dao.update(u)){
-			System.out.println("修改成功");
+		User u2 = dao.findById(u1.getId());
+		System.out.println(u2);
+		if(u1.getName()!=null){
+			u2.setName(u1.getName());
+		}
+		if(u1.getPassword()!=null){
+			u2.setName(u1.getPassword());
+		}
+		if(u1.getUserIcon()!=null){
+			u2.setUserIcon(u1.getUserIcon());
+		}
+		
+		if(dao.update(u2)){
+			out.print("修改成功");
 		}else{
-			System.out.println("修改失败");
+			out.print("修改失败");
 		}
 	}
 

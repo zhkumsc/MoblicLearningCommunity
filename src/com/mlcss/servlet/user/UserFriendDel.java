@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,16 +25,20 @@ public class UserFriendDel extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		System.out.println(userJson);
 		JSONObject o = JSONObject.fromObject(userJson);
 		UserRelShip urs = (UserRelShip)JSONObject.toBean(o, UserRelShip.class);
+		
 		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
-		if(ursdi.delete(urs.getId())){
-			System.out.println("删除好友成功！");
+		if(ursdi.delete(urs.getUserId(),urs.getFriendId())){
+			ursdi.delete(urs.getFriendId(), urs.getUserId());
+			out.print("删除好友成功！");
 		}else{
-			System.out.println("删除好友失败！");
+			out.print("删除好友失败！");
 		}
+		out.close();
 	}
 
 }

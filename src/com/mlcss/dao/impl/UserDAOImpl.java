@@ -105,6 +105,7 @@ public class UserDAOImpl implements UserDAO {
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
+				u.setUserIcon(rs.getString(5));
 				u.setCreateTime(rs.getDate(6));
 			}
 			

@@ -9,6 +9,15 @@ public class UserRelShip {
 	private int groupId;
 	private Timestamp createTime;
 	private String friendNote;
+	public UserRelShip(int userId, int friendId, int groupId,
+			Timestamp createTime, String friendNote) {
+		super();
+		this.userId = userId;
+		this.friendId = friendId;
+		this.groupId = groupId;
+		this.createTime = createTime;
+		this.friendNote = friendNote;
+	}
 	public String getFriendNote() {
 		return friendNote;
 	}
@@ -44,5 +53,9 @@ public class UserRelShip {
 	}
 	public void setCreateTime(Timestamp createTime) {
 		this.createTime = createTime;
+	}
+	public UserRelShip() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 }

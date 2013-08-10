@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class UserSelect extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		JSONObject jb = JSONObject.fromObject(userJson);
 		String flag = jb.getString("flag");
@@ -42,9 +43,9 @@ public class UserSelect extends HttpServlet {
 			User user = udi.findByEmail(str);
 			if(user!=null){
 				JSONObject jsonUser = JSONObject.fromObject(user);
-				System.out.println(jsonUser.toString());
+				out.print(jsonUser);
 			}else{
-				System.out.println("用户不存在！");
+				out.print("用户不存在！");
 			}
 		}else if(flag.equals("name")){
 			List<User> list = udi.findByName(str);
@@ -52,12 +53,12 @@ public class UserSelect extends HttpServlet {
 				Map<String, List<User>> map = new LinkedHashMap<String, List<User>>();
 				map.put("list", list);
 				JSONObject jsonUser = JSONObject.fromObject(map);
-				System.out.println(jsonUser.toString());
+				out.print(jsonUser);
 			}else{
-				System.out.println("用户不存在！");
+				out.print("用户不存在！");
 			}
 		}else{
-			System.out.println("查找错误！");
+			out.print("查找错误！");
 		}
 	}
 

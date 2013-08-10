@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,18 +27,23 @@ public class FriendRename extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		String userJson = request.getParameter("json");
 		System.out.println(userJson);
 		JSONObject o = JSONObject.fromObject(userJson);
 		UserRelShip urs = (UserRelShip)JSONObject.toBean(o, UserRelShip.class);
 		
+		if(urs.getFriendNote()==null){
+			out.print("好友备注不能为空！");
+		}
+		
 		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
 		if(ursdi.friendRename(urs)){
-			System.out.println("好友备注修改成功！");
+			out.print("好友备注修改成功！");
 		}else{
-			System.out.println("好友备注修改失败！");
+			out.print("好友备注修改失败！");
 		}
+		out.close();
 	}
 
 }

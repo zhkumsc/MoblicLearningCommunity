@@ -24,7 +24,7 @@ public class URSDAOImplTest {
 	
 	@Test
 	public void testDelete(){
-		ursdi.delete(2);
+		ursdi.delete(10,8);
 	}
 	
 	@Test
@@ -45,10 +45,10 @@ public class URSDAOImplTest {
 	
 	@Test
 	public void testListAll(){
-		List<UserRelShip> list = ursdi.listAll();
+		List<UserRelShip> list = ursdi.listAll(8);
 		for(int i=0;i<list.size();i++){
 			urs = list.get(i);
-			System.out.println("id="+urs.getId()+" userId="+urs.getUserId()+" friendId="+urs.getFriendId()+" groupId="+urs.getGroupId()+" createTime="+urs.getCreateTime());
+			System.out.println("id="+urs.getId()+" userId="+urs.getUserId()+" friendId="+urs.getFriendId()+" groupId="+urs.getGroupId()+" createTime="+urs.getCreateTime()+" friendNote="+urs.getFriendNote());
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.mlcss.servlet.user;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,15 +28,23 @@ public class FriendGroupSelect extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+        int userId = (Integer)request.getSession().getAttribute("userId");
+		
+		/*//下面这段代码时测试代码
+		String jsonString = request.getParameter("json");
+		JSONObject jb = JSONObject.fromObject(jsonString);
+		int userId = jb.getInt("userId");*/
 		
 		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
-		List<UserGroups> list = ugdi.listAll();
-	   
+		List<UserGroups> list = ugdi.listAll(userId);
+	 
 		Map<String,List<UserGroups>> map = new LinkedHashMap<String, List<UserGroups>>();
 		map.put("list", list);
-		JSONObject jsonUser = JSONObject.fromObject(map);	    	
+		JSONObject jsonUser = JSONObject.fromObject(map);
 		System.out.println(jsonUser.toString());
-		
+		out.print(jsonUser);
+		out.close();
 	}
 
 }
