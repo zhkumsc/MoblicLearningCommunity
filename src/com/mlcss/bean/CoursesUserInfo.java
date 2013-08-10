@@ -44,5 +44,10 @@ public class CoursesUserInfo {
 		this.role = role;
 	}
 	
+	@Override
+	public String toString() {
+		return "CoursesUserInfo [id="+id+",coursesId="+coursesId+",userId="+userId+",remark="
+				+remark+",role="+role+"]";
+	}
 	
 }

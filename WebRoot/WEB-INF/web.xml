@@ -48,6 +48,67 @@
     <servlet-name>MessageGetSystem</servlet-name>
     <servlet-class>com.mlcss.servlet.message.MessageGetSystem</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CourseAdd</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseDel</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseUpdate</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseJoin</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseJoin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseExit</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseExit</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserScheduleAdd</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.UserScheduleAdd</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserScheduleDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.UserScheduleDel</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserScheduleUpdate</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.UserScheduleUpdate</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserScheduleSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.UserScheduleSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseMemberRename</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseMemberRename</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TestCourseJoin</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.TestCourseJoin</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,6 +162,54 @@
   <servlet-mapping>
     <servlet-name>MessageGetSystem</servlet-name>
     <url-pattern>/service/MessageGetSystem</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseAdd</servlet-name>
+    <url-pattern>/service/CourseAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseDel</servlet-name>
+    <url-pattern>/service/CourseDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseUpdate</servlet-name>
+    <url-pattern>/service/CourseUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseSelect</servlet-name>
+    <url-pattern>/service/CourseSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseJoin</servlet-name>
+    <url-pattern>/service/CourseJoin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseExit</servlet-name>
+    <url-pattern>/service/CourseExit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserScheduleAdd</servlet-name>
+    <url-pattern>/service/UserScheduleAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserScheduleDel</servlet-name>
+    <url-pattern>/service/UserScheduleDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserScheduleUpdate</servlet-name>
+    <url-pattern>/service/UserScheduleUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserScheduleSelect</servlet-name>
+    <url-pattern>/service/UserScheduleSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseMemberRename</servlet-name>
+    <url-pattern>/service/CourseMemberRename</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestCourseJoin</servlet-name>
+    <url-pattern>/service/TestCourseJoin</url-pattern>
   </servlet-mapping>
 	
 	<filter>

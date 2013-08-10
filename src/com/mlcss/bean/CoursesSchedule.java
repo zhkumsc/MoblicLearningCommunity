@@ -60,7 +60,10 @@ public class CoursesSchedule {
 		this.coursesTime = coursesTime;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "CoursesSchedule [id="+id+",userId="+userId+",coursesId="+coursesId+",coursesTime="+
+					coursesTime+",coursesPlace="+coursesPlace+",isUsed="+isUsed+",teatherId="+teatherId+"]";
+	}
 	
 }
