@@ -37,7 +37,7 @@ public class TestFriendGroupAdd {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "{\"id\":9,\"groupname\":\"同事\"}";
+        String JsonString = "{\"id\":9,\"groupname\":\"同学\"}";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("json");

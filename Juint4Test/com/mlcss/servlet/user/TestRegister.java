@@ -20,8 +20,8 @@ public class TestRegister {
 
 	@Test
 	public void testRegister() {
-		try {
-			User u = new User(0, "123", ServiceUtil.toMD5("123"), "abc@sdf.com");
+		try{
+			User u = new User("ming", ServiceUtil.toMD5("123"), "kdjhld@msm.com","kjdkljfl");
 			String jsonString = JSONObject.fromObject(u).toString();
 			
 			URL url = new URL("http://localhost:8080/MoblicLearningCommunity/UserRegister");

@@ -39,7 +39,6 @@ public class UserFriendList extends HttpServlet {
 		JSONObject jb = JSONObject.fromObject(jsonString);
 		int userId = jb.getInt("userId");*/
 		
-		
 		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
 		List<UserRelShip> list = ursdi.listAll(userId);
 		
