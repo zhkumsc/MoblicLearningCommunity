@@ -38,7 +38,7 @@ public class TestUserFriendAdd {
 
 	@Test
 	public void testDopost() throws ServletException, IOException {
-		String JsonString = "{\"friendId\":10,\"userId\":9,\"groupId\":3,\"friendNote\":\"胖子\"}";
+		String JsonString = "{\"friendId\":10, \"userId\":27, \"friendNote\":\"胖子\"}";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("json");

@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.mlcss.bean.User;
+import com.mlcss.bean.UserGroups;
 import com.mlcss.bean.UserRelShip;
 import com.mlcss.dao.impl.UserDAOImpl;
 import com.mlcss.dao.impl.UserGroupsDAOImpl;
 import com.mlcss.dao.impl.UserRelShipDAOImpl;
-/*
- * 增加好友
+/* String JsonString = "{\"friendId\":10, \"userId\":27, \"friendNote\":\"胖子\"}";
+ * 如果客户端没有传过来friendNote，则使用好友用户名为好友备注
+ * 增加好友,将好友添加到默认分组
  */
 @SuppressWarnings("serial")
 public class UserFriendAdd extends HttpServlet {
@@ -53,6 +55,11 @@ public class UserFriendAdd extends HttpServlet {
 		
 		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
 		
+		//将好友添加到默认分组
+		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
+		UserGroups ug = ugdi.findFriendGroups(urs.getUserId(), "我的好友");
+		urs.setGroupId(ug.getId());
+		
 		if(ursdi.findByUserIdAndFriendId(urs.getUserId(), urs.getFriendId())!=null){
 			response.setStatus(400);
 			out.print("该好友已经存在");
@@ -77,12 +84,7 @@ public class UserFriendAdd extends HttpServlet {
 
 	private boolean invalid(UserRelShip urs) {
 		
-		if((Object)urs.getUserId() == null || (Object)urs.getFriendId() == null || (Object)urs.getGroupId() == null){
-			return false;
-		}
-		
-		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
-		if(ugdi.findById(urs.getGroupId())==null){
+		if((Object)urs.getUserId() == null || (Object)urs.getFriendId() == null){
 			return false;
 		}
 		return true;
