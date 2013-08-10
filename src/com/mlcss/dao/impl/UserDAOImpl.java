@@ -105,6 +105,7 @@ public class UserDAOImpl implements UserDAO {
 				u.setName(rs.getString(2));
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
+				u.setUserIcon(rs.getString(5));
 				u.setCreateTime(rs.getDate(6));
 			}
 			
@@ -173,8 +174,31 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public List<User> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> list = new ArrayList<User>();
+
+		conn = DBUtil.getConnection();
+		String sql = "select * from users where name = '" + name + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				User u = new User();
+				u.setId(rs.getInt(1));
+				u.setName(rs.getString(2));
+				u.setPassword(rs.getString(3));
+				u.setEmail(rs.getString(4));
+				u.setCreateTime(new java.util.Date(rs.getDate(6).getTime()));
+				
+				list.add(u);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return list;	
 	}
 
 

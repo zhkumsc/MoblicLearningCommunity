@@ -22,7 +22,7 @@ public class testUserNotesDAOImpl {
 		UserNotes u=new UserNotes();
 		u.setContent("adfjal");
 		u.setTitle("sss");
-		u.setUserid(8);
+		u.setUserid(9);
 		notes.add(u);
 		List<UserNotes> k=new ArrayList<UserNotes>();
 		

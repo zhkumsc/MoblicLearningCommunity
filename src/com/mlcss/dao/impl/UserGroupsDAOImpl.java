@@ -3,6 +3,8 @@ package com.mlcss.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mlcss.bean.UserGroups;
 import com.mlcss.dao.UserGroupsDAO;
@@ -62,7 +64,7 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update usergroups set userId="+user.getUserid()+" ,groupName='"+user.getGroupname()+"' where id="+user.getId();
+			String sql="update usergroups set groupName='"+user.getGroupname()+"' where id="+user.getId();
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -77,27 +79,31 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		return b;
 	}
 	
-
-	public UserGroups findById(int id) {
-		UserGroups k=new UserGroups();
+	public List<UserGroups> listAll(int userId) {
+		List<UserGroups> list = new ArrayList<UserGroups>();
+		conn = DBUtil.getConnection();
+        String sql = "select * from usergroups where userId='" + userId + "'";
+		
 		try{
-			//得到链接
-			conn=DBUtil.getConnection();
-			String sql="select * from usergroups where id="+id;
-			ps=conn.prepareStatement(sql);
-			ResultSet rs=ps.executeQuery();
-			rs.next();
-			k.setGroupname(rs.getString(3));
-			k.setId(rs.getInt(1));
-			k.setUserid(rs.getInt(2));
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				UserGroups ur = new UserGroups();
+				ur.setId(rs.getInt(1));
+				ur.setUserid(rs.getInt(2));
+				ur.setGroupname(rs.getString(3));
+				
+				list.add(ur);
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			this.close();
+			DBUtil.close();
 		}
-		return k;
+		return list;	
 	}
+	
 	private void close() {
 		try{
 			if(rs!=null){
@@ -115,6 +121,53 @@ public class UserGroupsDAOImpl implements UserGroupsDAO{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public UserGroups findById(int id) {
+		UserGroups ug = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from usergroups where id = '" + id + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				ug = new UserGroups();		
+				ug.setId(rs.getInt(1));
+				ug.setUserid(rs.getInt(2));
+				ug.setGroupname(rs.getString(3));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return ug;	
+	}
+
+	public UserGroups findFriendGroups(int userId, String groupName) {
+
+		UserGroups ug = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from usergroups where userId = '" + userId + "' and groupName = '" + groupName + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				ug = new UserGroups();		
+				ug.setId(rs.getInt(1));
+				ug.setUserid(rs.getInt(2));
+				ug.setGroupname(rs.getString(3));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return ug;	
 	}
 
 }

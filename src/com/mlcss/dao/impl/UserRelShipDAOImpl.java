@@ -1,6 +1,5 @@
 package com.mlcss.dao.impl;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +21,7 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="insert into userrelationship(userId,friendId,groupId,createTime) values('"+urs.getUserId()+"','"+urs.getFriendId()+"','"+urs.getGroupId()+"','"+urs.getCreateTime()+"') ";
+			String sql="insert into userrelationship(userId,friendId,groupId,createTime,friendNote) values('"+urs.getUserId()+"','"+urs.getFriendId()+"','"+urs.getGroupId()+"','"+urs.getCreateTime()+"','"+urs.getFriendNote()+"') ";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -38,12 +37,12 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		return b;
 	}
 
-	public boolean delete(Serializable id) {
+	public boolean delete(int userId,int friendId) {
 		boolean b=false;
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="delete from userrelationship where id='" + id + "'";
+			String sql="delete from userrelationship where userId='" + userId + "' and friendId='" + friendId + "'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){
@@ -63,7 +62,27 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update userrelationship set userId='"+urs.getUserId()+"',friendId='"+urs.getFriendId()+"',groupId='"+urs.getGroupId()+"'";
+			String sql="update userrelationship set userId='"+urs.getUserId()+"',friendId='"+urs.getFriendId()+"',groupId='"+urs.getGroupId()+"' where id='"+urs.getId()+"'";
+			ps=conn.prepareStatement(sql);
+			int num=ps.executeUpdate();
+			if(num==1){ 
+				//修改成功！
+				b=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return b;
+	}
+	
+	public boolean friendRename(UserRelShip urs) {
+		boolean b=false;
+		try{
+			//得到链接
+			conn=DBUtil.getConnection();
+			String sql="update userrelationship set friendNote='"+urs.getFriendNote()+"' where id='"+urs.getId()+"'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
@@ -93,6 +112,7 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 				urs.setId(rs.getInt(3));
 				urs.setId(rs.getInt(4));
 				urs.setCreateTime(rs.getTimestamp(5));
+				urs.setFriendNote(rs.getString(6));
 			}
 			
 		}catch(Exception e){
@@ -103,10 +123,10 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		return urs;	
 	}
 
-	public List<UserRelShip> listAll() {
+	public List<UserRelShip> listAll(int userId) {
 		List<UserRelShip> list = new ArrayList<UserRelShip>();
 		conn = DBUtil.getConnection();
-		String sql = "select * from userrelationship";
+		String sql = "select * from userrelationship where userId = '" + userId + "'";
 		
 		try{
 			ps = conn.prepareStatement(sql);
@@ -114,10 +134,11 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 			while(rs.next()){
 				UserRelShip urs = new UserRelShip();
 				urs.setId(rs.getInt(1));
-				urs.setId(rs.getInt(2));
-				urs.setId(rs.getInt(3));
-				urs.setId(rs.getInt(4));
+				urs.setUserId(rs.getInt(2));
+				urs.setFriendId(rs.getInt(3));
+				urs.setGroupId(rs.getInt(4));
 				urs.setCreateTime(rs.getTimestamp(5));
+				urs.setFriendNote(rs.getString(6));
 				
 				list.add(urs);
 			}
@@ -128,6 +149,52 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 			DBUtil.close();
 		}
 		return list;	
+	}
+
+	public UserRelShip findByUserIdAndFriendId(int userId, int friendId) {
+		UserRelShip urs = null;
+		conn = DBUtil.getConnection();
+		String sql = "select * from userrelationship where userId = '" + userId + "' and friendId = '" + friendId + "'";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){	
+				urs = new UserRelShip();		
+				urs.setId(rs.getInt(1));
+				urs.setId(rs.getInt(2));
+				urs.setId(rs.getInt(3));
+				urs.setId(rs.getInt(4));
+				urs.setCreateTime(rs.getTimestamp(5));
+				urs.setFriendNote(rs.getString(6));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return urs;	
+	}
+
+	public boolean friendGroupMove(UserRelShip urs) {
+		boolean b=false;
+		try{
+			//得到链接
+			conn=DBUtil.getConnection();
+			String sql="update userrelationship set groupId='"+urs.getGroupId()+"' where id='"+urs.getId()+"'";
+			ps=conn.prepareStatement(sql);
+			int num=ps.executeUpdate();
+			if(num==1){ 
+				//修改成功！
+				b=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			DBUtil.close();
+		}
+		return b;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mlcss.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import com.mlcss.bean.User;
+import com.mlcss.bean.UserGroups;
 import com.mlcss.dao.UserDAO;
 import com.mlcss.dao.impl.UserDAOImpl;
+import com.mlcss.dao.impl.UserGroupsDAOImpl;
 
 @SuppressWarnings("serial")
 public class UserRegister extends HttpServlet {
@@ -29,12 +32,17 @@ public class UserRegister extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {	
+	
 		String userJsonString = request.getParameter("json");
-System.out.println(userJsonString);
+        System.out.println(userJsonString);
 		JSONObject o;
 		o = JSONObject.fromObject(userJsonString);
 		User u = (User)JSONObject.toBean(o, User.class);
-		resgiter(response, u);	
+		u.setCreateTime(new Date());
+		
+		resgiter(response, u);
+		
+		
 	}
 
 	private void resgiter(HttpServletResponse response, User user) throws IOException {
@@ -48,7 +56,7 @@ System.out.println(userJsonString);
 		} 
 		
 		if(userDAO.findByEmail(user.getEmail()) != null) {
-System.out.println(user.getEmail());
+            System.out.println(user.getEmail());
 			response.setStatus(400);
 			out.print("该用户已经存在");
 			System.out.println("该用户已经存在");
@@ -61,7 +69,21 @@ System.out.println(user.getEmail());
 			return;
 		} 
 		
-		out.print("注册成功");
+		UserDAOImpl udi = new UserDAOImpl();
+		User u = udi.findByEmail(user.getEmail());
+		
+		UserGroups ug = new UserGroups();
+		ug.setUserid(u.getId());
+		ug.setGroupname("我的好友");
+		
+		System.out.println(ug);
+		UserGroupsDAOImpl ugdi = new UserGroupsDAOImpl();
+		//添加分组
+		if(ugdi.add(ug)){
+			out.print("注册成功！");
+		}else{
+			out.print("注册失败！");		
+		}
 	}
 
 	/**

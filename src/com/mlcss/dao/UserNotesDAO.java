@@ -7,6 +7,7 @@ import java.util.List;
 import com.mlcss.bean.UserNotes;
 
 public interface UserNotesDAO {
+	//add需要参数是suerid,标题，内容
 	public boolean add(UserNotes notes);
 	public boolean delete(int id);
 	public boolean update(UserNotes notes);

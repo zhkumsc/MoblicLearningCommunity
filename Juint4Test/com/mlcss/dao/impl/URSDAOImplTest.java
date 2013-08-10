@@ -15,32 +15,40 @@ public class URSDAOImplTest {
 	@Test
 	public void testAdd(){		
 		urs.setUserId(10);
-		urs.setFriendId(13);
-		urs.setGroupId(1);
+		urs.setFriendId(8);
+		urs.setGroupId(3);
 		urs.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		urs.setFriendNote("小王");
 		ursdi.add(urs);
 	}
 	
 	@Test
 	public void testDelete(){
-		ursdi.delete(2);
+		ursdi.delete(10,8);
 	}
 	
 	@Test
 	public void testUpdate(){
-		urs.setId(3);
+		urs.setId(2);
 		urs.setUserId(8);
-		urs.setFriendId(11);
-		urs.setGroupId(2);
+		urs.setFriendId(10);
+		urs.setGroupId(3);
 		ursdi.update(urs);
 	}
 	
 	@Test
+	public void testFriendRename(){
+		urs.setId(4);
+		urs.setFriendNote("小胖子");
+		ursdi.friendRename(urs);
+	}
+	
+	@Test
 	public void testListAll(){
-		List<UserRelShip> list = ursdi.listAll();
+		List<UserRelShip> list = ursdi.listAll(8);
 		for(int i=0;i<list.size();i++){
 			urs = list.get(i);
-			System.out.println("id="+urs.getId()+" userId="+urs.getUserId()+" friendId="+urs.getFriendId()+" groupId="+urs.getGroupId()+" createTime="+urs.getCreateTime());
+			System.out.println("id="+urs.getId()+" userId="+urs.getUserId()+" friendId="+urs.getFriendId()+" groupId="+urs.getGroupId()+" createTime="+urs.getCreateTime()+" friendNote="+urs.getFriendNote());
 		}
 	}
 }

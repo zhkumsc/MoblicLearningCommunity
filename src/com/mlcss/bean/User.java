@@ -96,13 +96,19 @@ public class User implements Serializable{
 	}
 
 
-	public User(int id, String name, String password, String email) {
+	
+
+	public User(String name, String password, String email, String userIcon) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.email = email;
+		this.userIcon = userIcon;
+		
 	}
+
+
+
 
 	public User() {
 	}
