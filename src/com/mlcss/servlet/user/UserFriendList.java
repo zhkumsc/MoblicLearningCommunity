@@ -2,6 +2,7 @@ package com.mlcss.servlet.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
+import com.mlcss.bean.User;
 import com.mlcss.bean.UserRelShip;
+import com.mlcss.dao.impl.UserDAOImpl;
 import com.mlcss.dao.impl.UserRelShipDAOImpl;
 /**
  * 列出所有好友
@@ -46,8 +49,16 @@ public class UserFriendList extends HttpServlet {
 			out.print("该用户暂时没有好友！");
 		}
 		
-		Map<String,List<UserRelShip>> map = new LinkedHashMap<String, List<UserRelShip>>();
-		map.put("list", list);
+		List<User> list1 = new ArrayList<User>();
+		for(UserRelShip urs:list){
+			int userId1 = urs.getFriendId();
+			UserDAOImpl udi = new UserDAOImpl();
+			User u = udi.findById(userId1);
+			list1.add(u);
+		}
+		
+		Map<String,List<User>> map = new LinkedHashMap<String, List<User>>();
+		map.put("list", list1);
 		JSONObject jsonUser = JSONObject.fromObject(map);	    	
 		System.out.println(jsonUser.toString());
 		out.print(jsonUser.toString());

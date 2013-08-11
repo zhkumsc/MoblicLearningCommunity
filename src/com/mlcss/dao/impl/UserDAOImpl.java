@@ -103,10 +103,10 @@ public class UserDAOImpl implements UserDAO {
 				u = new User();		
 				u.setId(rs.getInt(1));
 				u.setName(rs.getString(2));
-				u.setPassword(rs.getString(3));
+				//u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setUserIcon(rs.getString(5));
-				u.setCreateTime(rs.getDate(6));
+				u.setCreateTime(new java.util.Date(rs.getDate(6).getTime()));
 			}
 			
 		}catch(Exception e){
