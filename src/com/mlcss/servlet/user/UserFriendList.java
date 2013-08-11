@@ -35,12 +35,12 @@ public class UserFriendList extends HttpServlet {
 			throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
-		int userId = (Integer)request.getSession().getAttribute("userId");
+		//int userId = (Integer)request.getSession().getAttribute("userId");
 		
-		/*//下面这段代码时测试代码
+		//下面这段代码时测试代码
 		String jsonString = request.getParameter("json");
 		JSONObject jb = JSONObject.fromObject(jsonString);
-		int userId = jb.getInt("userId");*/
+		int userId = jb.getInt("userId");
 		
 		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
 		List<UserRelShip> list = ursdi.listAll(userId);
