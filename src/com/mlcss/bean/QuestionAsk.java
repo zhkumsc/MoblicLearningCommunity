@@ -7,7 +7,7 @@ public class QuestionAsk {
 	private  int coursesid;
 	private  String title;
 	private  String content;
-	private String createby;
+	private int createby;
 	private Timestamp createtime;
 	
 	public int getId() {
@@ -34,10 +34,10 @@ public class QuestionAsk {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCreateby() {
+	public int getCreateby() {
 		return createby;
 	}
-	public void setCreateby(String createby) {
+	public void setCreateby(int createby) {
 		this.createby = createby;
 	}
 	public Timestamp getCreatetime() {

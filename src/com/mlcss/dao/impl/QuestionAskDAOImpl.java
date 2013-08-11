@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class QuestionAskDAOImpl implements QuestionaskDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "insert into question() values(?,?,?,?,?)";
+			String sql = "insert into questionask(coursesid,title,content,createby,createtime) values(?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, question.getCoursesid());
 			ps.setString(2, question.getTitle());
 			ps.setString(3, question.getContent());
-			ps.setString(4, question.getCreateby());
-			ps.setTimestamp(5, question.getCreatetime());
+			ps.setInt(4, question.getCreateby());
+			ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 			
 			ps.executeUpdate();
 			return true;
@@ -66,7 +67,7 @@ public class QuestionAskDAOImpl implements QuestionaskDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "delete from questrionask where id=?";
+			String sql = "delete from questionask where id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,id);
 			
@@ -148,14 +149,14 @@ public class QuestionAskDAOImpl implements QuestionaskDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "update questionask set coursesId = ?, tile = ?, content = ?, createby = ?, createtime = ? where id = ?";
+			String sql = "update questionask set coursesId = ?, title = ?, content = ?, createby = ?, createtime = ? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,questions.getCoursesid());
 			ps.setString(2, questions.getTitle());
 			ps.setString(3, questions.getContent());
-			ps.setString(4, questions.getCreateby());
-			ps.setTimestamp(5, questions.getCreatetime());
-		    ps.setInt(5, questions.getId());
+			ps.setInt(4, questions.getCreateby());
+			ps.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+		    ps.setInt(6, questions.getId());
 			
 			if (ps.executeUpdate() <= 0) {
 				return false;
@@ -205,8 +206,9 @@ public class QuestionAskDAOImpl implements QuestionaskDAO {
 				q.setId(rs.getInt("id"));
 				q.setCoursesid(rs.getInt("coursesId"));
 				q.setContent(rs.getString("content"));
-				q.setCreateby(rs.getString("createby"));
+				q.setCreateby(rs.getInt("createby"));
 				q.setCreatetime(rs.getTimestamp("createTime"));
+				q.setTitle(rs.getString("title"));
 				list.add(q);
 			}
 			
@@ -256,7 +258,8 @@ public class QuestionAskDAOImpl implements QuestionaskDAO {
 				q.setId(rs.getInt("id"));
 				q.setCoursesid(rs.getInt("coursesId"));
 				q.setContent(rs.getString("content"));
-				q.setCreateby(rs.getString("createby"));
+				q.setTitle("title");
+				q.setCreateby(rs.getInt("createby"));
 				q.setCreatetime(rs.getTimestamp("createTime"));
 				
 			}

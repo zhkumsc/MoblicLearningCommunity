@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import com.mlcss.dao.QuestionReplyDAO;
 import com.mlcss.dao.QuestionaskDAO;
 import com.mlcss.util.DBUtil;
 
-public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
+public class QuestionReplyDAOImpl implements QuestionReplyDAO {
 	
 	/**
 	 * 增加评论
@@ -26,12 +27,12 @@ public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "insert into question(questionId,usreId,content,createTime) values(?,?,?,?)";
+			String sql = "insert into questionreply(questionId,userId,content,createTime) values(?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, question.getQuestionid());
 			ps.setInt(2, question.getUserid());
 			ps.setString(3, question.getContent());
-			ps.setTimestamp(4, question.getCreatetime());			
+			ps.setTimestamp(4,new Timestamp(System.currentTimeMillis()));			
 			ps.executeUpdate();
 			return true;
 		} catch (SQLException e) {			
@@ -148,13 +149,12 @@ public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "update questionreply(questionId,usreId,content,creatTime) set questionId = ?, usreId = ?, content = ?, creatTime = ? where id = ?";
+			String sql = "update questionreply set questionId = ?, userId = ?, content = ? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,questions.getQuestionid());
 			ps.setInt(2, questions.getUserid());
 			ps.setString(3, questions.getContent());
-			ps.setTimestamp(4, questions.getCreatetime());
-	
+	        ps.setInt(4,questions.getId());
 			
 			if (ps.executeUpdate() <= 0) {
 				return false;
@@ -193,7 +193,7 @@ public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
 		List<QuestionReply> list = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "select * from questionask where questionId=?";
+			String sql = "select * from questionreply where questionId=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, questionid);
 			
@@ -203,7 +203,7 @@ public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
 				QuestionReply q = new QuestionReply();
 				q.setId(rs.getInt("id"));
 				q.setQuestionid(rs.getInt("questionId"));
-				q.setUserid(rs.getInt("usreId"));
+				q.setUserid(rs.getInt("userId"));
 				q.setContent(rs.getString("content"));
 				q.setCreatetime(rs.getTimestamp("createTime"));
 				list.add(q);
@@ -244,7 +244,7 @@ public class QuestionAlpyDAOImpl implements QuestionReplyDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "select * from questionask where id=?";
+			String sql = "select * from questionreply where id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			

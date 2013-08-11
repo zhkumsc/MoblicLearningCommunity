@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public boolean add(Courses course) {
+	public  boolean add(Courses course) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		try {
@@ -29,8 +30,8 @@ public class CoursesDAOImpl implements CoursesDAO {
 			String sql = "insert into courses(name,createTime,createby,classhours,description) values(?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, course.getName());
-			ps.setTimestamp(2,course.getCreateTime() );
-			ps.setString(3, course.getCreateby());
+			ps.setTimestamp(2,new Timestamp(System.currentTimeMillis()) );
+			ps.setInt(3, course.getCreateby());
 			ps.setInt(4, course.getClassshuours());
 			ps.setString(5, course.getDescription());
 			
@@ -153,10 +154,12 @@ public class CoursesDAOImpl implements CoursesDAO {
 			String sql = "update courses set name = ?, createTime = ?, createby = ?, classhours=?,description=? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, course.getName());
-			ps.setTimestamp(2, course.getCreateTime());
-			ps.setString(3, course.getCreateby());
+			ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+			ps.setInt(3, course.getCreateby());
 			ps.setInt(4, course.getClassshuours());
 			ps.setString(5, course.getDescription());
+			ps.setInt(6,course.getId());
+			ps.executeUpdate();
 			if (ps.executeUpdate() <= 0) {
 				return false;
 			}
@@ -202,7 +205,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 				Courses c = new Courses();
 				c.setName(rs.getString("name"));
 				c.setCreateTime(rs.getTimestamp("createTime"));
-				c.setCreateby(rs.getString("createby"));
+				c.setCreateby(rs.getInt("createby"));
 				c.setClassshuours(rs.getInt("classhours"));
 				c.setDescription(rs.getString("description"));
 				list.add(c);
@@ -254,7 +257,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 				c.setId(rs.getInt("id"));
 				c.setName(rs.getString("name"));
 				c.setCreateTime(rs.getTimestamp("createtime"));
-				c.setCreateby(rs.getString("createby"));
+				c.setCreateby(rs.getInt("createby"));
 				c.setClassshuours(rs.getInt("classhours"));
 				c.setDescription(rs.getString("description"));
 				
