@@ -39,6 +39,10 @@ public class CoursesFollow {
 		this.createTime = createTime;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "CoursesFollow [id="+id+",coursesId="+coursesId+",userId="+userId+
+				",createTime="+createTime+"]";
+	}
 	
 }

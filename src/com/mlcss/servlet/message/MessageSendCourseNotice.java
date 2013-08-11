@@ -60,7 +60,7 @@ int userId = 1; //测试
 	private boolean isCreator(int userId, CoursesNotice cn) {
 		CoursesDAO cd = new CoursesDAOImpl();
 		Courses course = cd.findById(cn.getCoursesId());
-		if(course.getCreateby().equals(String.valueOf(userId))) {
+		if(course.getCreateby()==userId) {
 			cn.setNoticeTime(DateTimeUtil.date2String(new Date()));
 			cn.setUserId(userId);
 			cn.setReceived(false);

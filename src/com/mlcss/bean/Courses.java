@@ -7,7 +7,7 @@ public class Courses {
 	private int id;
 	private String name;
 	private Timestamp createTime;
-	private String createby ;
+	private int createby ;
 	private int classshuours ;
     private String description ;
 		public int getId() {
@@ -28,10 +28,10 @@ public class Courses {
 	public void setCreateTime( Timestamp createTime) {
 		this.createTime = createTime;
 	}
-	public String getCreateby() {
+	public int getCreateby() {
 		return createby;
 	}
-	public void setCreateby(String createby) {
+	public void setCreateby(int createby) {
 		this.createby = createby;
 	}
 	public int getClassshuours() {
