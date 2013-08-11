@@ -9,6 +9,35 @@
 		<servlet-class>com.mlcss.servlet.user.UserLogin</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>FriendGroupAdd</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.FriendGroupAdd</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FriendGroupDel</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.FriendGroupDel</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FriendGroupSelect</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.FriendGroupSelect</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FriendGroupUpdate</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.FriendGroupUpdate</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserFriendAdd</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.UserFriendAdd</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserFriendDel</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.UserFriendDel</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserLogout</servlet-name>
+		<servlet-class>com.mlcss.servlet.user.UserLogout</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>UserRegister</servlet-name>
 		<servlet-class>com.mlcss.servlet.user.UserRegister</servlet-class>
 	</servlet>
@@ -103,14 +132,10 @@
     <servlet-class>com.mlcss.servlet.assistant.NoteShare</servlet-class>
   </servlet>
   <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>FriendGroupMove</servlet-name>
     <servlet-class>com.mlcss.servlet.user.FriendGroupMove</servlet-class>
   </servlet>
   <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>t</display-name>
     <servlet-name>FriendRename</servlet-name>
     <servlet-class>com.mlcss.servlet.user.FriendRename</servlet-class>
   </servlet>
@@ -121,6 +146,10 @@
   <servlet>
     <servlet-name>UserSelect</servlet-name>
     <servlet-class>com.mlcss.servlet.user.UserSelect</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UserUpdate</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.UserUpdate</servlet-class>
   </servlet>
 
 
@@ -240,6 +269,38 @@
   <servlet-mapping>
     <servlet-name>UserSelect</servlet-name>
     <url-pattern>/service/UserSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserUpdate</servlet-name>
+    <url-pattern>/service/UserUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogout</servlet-name>
+    <url-pattern>/service/UserLogour</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserFriendDel</servlet-name>
+    <url-pattern>/service/UserFrienDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserFriendAdd</servlet-name>
+    <url-pattern>/service/UserFriendAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendGroupUpdate</servlet-name>
+    <url-pattern>/service/FriendGroupUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendGroupSelect</servlet-name>
+    <url-pattern>/service/FriendGroupSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendGroupDel</servlet-name>
+    <url-pattern>/service/FriendGroupDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendGroupAdd</servlet-name>
+    <url-pattern>/service/FriendGroupAdd</url-pattern>
   </servlet-mapping>
 	
 	<filter>
