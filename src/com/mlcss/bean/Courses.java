@@ -6,7 +6,7 @@ import java.util.Date;
 public class Courses {
 	private int id;
 	private String name;
-	private Timestamp createTime;
+	private String createTime;
 	private int createby ;
 	private int classshuours ;
     private String description ;
@@ -21,12 +21,6 @@ public class Courses {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public Timestamp getCreateTime() {
-		return createTime;
-	}
-	public void setCreateTime( Timestamp createTime) {
-		this.createTime = createTime;
 	}
 	public int getCreateby() {
 		return createby;
@@ -45,6 +39,13 @@ public class Courses {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 	public String toString() {
 		return "Courses [id=" + id + ", name=" + name + ", createTime="

@@ -41,8 +41,8 @@ public class CourseSelect extends HttpServlet {
 			response.setStatus(400);
 			out.println("查找课程失败！");
 		}else{
-			out.println("查找课程成功");
-			System.out.println(JSONselected);
+//			out.println("查找课程成功");
+			out.println(JSONselected);
 		}
 		out.flush();
 		out.close();

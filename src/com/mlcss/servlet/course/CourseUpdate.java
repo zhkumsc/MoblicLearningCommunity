@@ -38,7 +38,8 @@ public class CourseUpdate extends HttpServlet {
 			response.setStatus(400);
 			out.println("修改课程失败！");
 		}else
-			out.println("修改课程成功");
+//			out.println("修改课程成功");
+			out.println(courses);
 		out.flush();
 		out.close();
 	}

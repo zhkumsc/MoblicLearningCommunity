@@ -27,13 +27,12 @@ public class CoursesDAOImpl implements CoursesDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "insert into courses(name,createTime,createby,classhours,description) values(?,?,?,?,?)";
+			String sql = "insert into courses(name,createTime,createby,classhours,description) values(?,NOW(),?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, course.getName());
-			ps.setTimestamp(2,new Timestamp(System.currentTimeMillis()) );
-			ps.setInt(3, course.getCreateby());
-			ps.setInt(4, course.getClassshuours());
-			ps.setString(5, course.getDescription());
+			ps.setInt(2, course.getCreateby());
+			ps.setInt(3, course.getClassshuours());
+			ps.setString(4, course.getDescription());
 			
 			ps.executeUpdate();
 			return true;
@@ -154,7 +153,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 			String sql = "update courses set name = ?, createTime = ?, createby = ?, classhours=?,description=? where id = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, course.getName());
-			ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+			ps.setString(2, course.getCreateTime());
 			ps.setInt(3, course.getCreateby());
 			ps.setInt(4, course.getClassshuours());
 			ps.setString(5, course.getDescription());
@@ -204,7 +203,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 			while(rs.next()) {
 				Courses c = new Courses();
 				c.setName(rs.getString("name"));
-				c.setCreateTime(rs.getTimestamp("createTime"));
+				c.setCreateTime(rs.getString("createTime"));
 				c.setCreateby(rs.getInt("createby"));
 				c.setClassshuours(rs.getInt("classhours"));
 				c.setDescription(rs.getString("description"));
@@ -256,7 +255,7 @@ public class CoursesDAOImpl implements CoursesDAO {
 				c = new Courses();
 				c.setId(rs.getInt("id"));
 				c.setName(rs.getString("name"));
-				c.setCreateTime(rs.getTimestamp("createtime"));
+				c.setCreateTime(rs.getString("createtime"));
 				c.setCreateby(rs.getInt("createby"));
 				c.setClassshuours(rs.getInt("classhours"));
 				c.setDescription(rs.getString("description"));

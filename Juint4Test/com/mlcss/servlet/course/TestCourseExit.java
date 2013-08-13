@@ -11,7 +11,9 @@ import net.sf.json.JSONObject;
 import org.junit.Test;
 
 import com.mlcss.bean.CoursesFollow;
-
+/**
+ * @author jc
+ */
 public class TestCourseExit {
 
 	@Test
