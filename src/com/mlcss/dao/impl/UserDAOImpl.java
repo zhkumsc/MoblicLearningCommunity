@@ -177,7 +177,7 @@ public class UserDAOImpl implements UserDAO {
 		List<User> list = new ArrayList<User>();
 
 		conn = DBUtil.getConnection();
-		String sql = "select * from users where name = '" + name + "'";
+		String sql = "select * from users where name like '%" + name + "%'";
 		
 		try{
 			ps = conn.prepareStatement(sql);

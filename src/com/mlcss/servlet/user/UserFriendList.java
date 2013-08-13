@@ -54,6 +54,7 @@ public class UserFriendList extends HttpServlet {
 			int userId1 = urs.getFriendId();
 			UserDAOImpl udi = new UserDAOImpl();
 			User u = udi.findById(userId1);
+			u.setName(urs.getFriendNote());
 			list1.add(u);
 		}
 		

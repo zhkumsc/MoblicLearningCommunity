@@ -15,15 +15,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestUserSelect {
+public class TestUserSelectById {
 	
-	private UserSelect servlet;
+	private UserSelectById servlet;
 	private HttpServletRequest mockRequest;
 	private HttpServletResponse mockResponse;
 
 	@Before
 	public void setUp() throws Exception {
-        servlet = new UserSelect();
+        servlet = new UserSelectById();
 		
 		mockRequest = createMock(HttpServletRequest.class);
 		mockResponse = createMock(HttpServletResponse.class);
@@ -37,16 +37,16 @@ public class TestUserSelect {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "{\"str\":\"小\", \"flag\":\"name\"}";
+        String JsonString = "8";
 		
 		//录制request和response的动作
-		mockRequest.getParameter("json");
+		mockRequest.getParameter("id");
 		expectLastCall().andReturn(JsonString);   //设置前一方法被调用时的返回值
 		
 		//mockResponse.sendRedirect("wel.jsp");
 		StringWriter output = new StringWriter();   
         PrintWriter contentWriter = new PrintWriter(output);   
-        EasyMock.expect(mockResponse.getWriter()).andReturn(contentWriter);
+        EasyMock.expect(mockResponse.getWriter()).andReturn(contentWriter);   
 		
 		replay(mockRequest);
 		replay(mockResponse);

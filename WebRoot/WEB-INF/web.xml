@@ -203,6 +203,11 @@
     
 
   </servlet>
+  <servlet>
+    <servlet-name>UserSelectById</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.UserSelectById</servlet-class>
+  </servlet>
+
 
 
 
@@ -401,6 +406,10 @@
   <servlet-mapping>
     <servlet-name>FriendGroupAdd</servlet-name>
     <url-pattern>/service/FriendGroupAdd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserSelectById</servlet-name>
+    <url-pattern>/servlce/UserSelectById</url-pattern>
   </servlet-mapping>
 	
 	<filter>
