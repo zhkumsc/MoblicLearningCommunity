@@ -12,7 +12,9 @@ import org.junit.Test;
 
 import com.mlcss.bean.CoursesSchedule;
 
-
+/**
+ * @author jc
+ */
 public class TestUserScheduleAdd {
 
 	@Test

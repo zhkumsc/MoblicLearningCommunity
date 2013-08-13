@@ -37,7 +37,8 @@ public class CourseAdd extends HttpServlet {
 			response.setStatus(400);
 			out.println("表单数据错误创建失败！");
 		}else
-			out.println("创建课程成功");
+			out.println(courses);
+			//out.println("创建课程成功");
 		out.flush();
 		out.close();
 	}

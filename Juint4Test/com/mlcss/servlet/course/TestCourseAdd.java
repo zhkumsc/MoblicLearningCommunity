@@ -16,11 +16,13 @@ import org.junit.Test;
 import com.mlcss.bean.Courses;
 import com.mlcss.bean.CoursesChatRecords;
 import com.mlcss.util.DateTimeUtil;
-
+/**
+ * @author jc
+ */
 public class TestCourseAdd {
 
 	@Test
-	private void testReceive() throws Exception{
+	public void testReceive() throws Exception{
 		
 		URL url = new URL(
 				"http://localhost:8080/MoblicLearningCommunity/service/CourseAdd");
@@ -31,22 +33,26 @@ public class TestCourseAdd {
 		conn.setRequestProperty("Content-Type",
 				"application/x-www-form-urlencoded");
 		
-//		Courses courses = new Courses();
+		Courses courses = new Courses();
 //		courses.setCreateTime(DateTimeUtil.String2Date("2013-8-10 15:51:40"));
-//		courses.setCreateby(createby)
+		courses.setCreateby(8);
+		courses.setName("php");
+		courses.setClassshuours(80);
+		courses.setDescription("hello php");
+		
+		String jsonString = JSONObject.fromObject(courses).toString();
 		
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-		dos.write(("json=" + 0).getBytes());
+		dos.write(("json=" + jsonString).getBytes());
+		System.out.println(conn.getResponseCode());
 		dos.flush();
 		dos.close();
-		System.out.println(conn.getResponseCode());
 		
 		
 		BufferedReader dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		String jsonString = dis.readLine();
-		System.out.println(jsonString);
-		Courses c = (Courses) JSONObject.toBean(JSONObject.fromObject(jsonString), Courses.class);
-		System.out.println(c);
+		String injsonString = dis.readLine();
+		System.out.println(injsonString); 
+		dis.close();
 		conn.disconnect();
 	}
 }

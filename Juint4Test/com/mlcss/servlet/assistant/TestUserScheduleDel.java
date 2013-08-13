@@ -7,7 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.junit.Test;
-
+/**
+ * @author jc
+ */
 
 public class TestUserScheduleDel {
 

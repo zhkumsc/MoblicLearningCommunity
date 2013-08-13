@@ -12,7 +12,9 @@ import net.sf.json.JSONArray;
 import org.junit.Test;
 
 import com.mlcss.bean.CoursesSchedule;
-
+/**
+ * @author jc
+ */
 public class TestUserScheduleSelect {
 	
 	@Test

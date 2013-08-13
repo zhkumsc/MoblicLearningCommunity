@@ -1,4 +1,4 @@
-package com.mlcss.servlet.assistant;
+package com.mlcss.servlet.course;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -10,16 +10,17 @@ import net.sf.json.JSONObject;
 
 import org.junit.Test;
 
-import com.mlcss.bean.CoursesSchedule;
+import com.mlcss.bean.Courses;
 /**
  * @author jc
  */
-public class TestUserScheduleUpdate {
-
+public class TestCoursesUpdate {
+	
 	@Test
-	public void testReceive() throws Exception {
+	public void testReceive() throws Exception{
+		
 		URL url = new URL(
-				"http://localhost:8080/MoblicLearningCommunity/service/UserScheduleUpdate");
+				"http://localhost:8080/MoblicLearningCommunity/service/CourseUpdate");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
@@ -27,19 +28,22 @@ public class TestUserScheduleUpdate {
 		conn.setRequestProperty("Content-Type",
 				"application/x-www-form-urlencoded");
 		
-		CoursesSchedule coursesSchedule = new CoursesSchedule();
-		coursesSchedule.setCoursesId(2);
-		coursesSchedule.setCoursesPlace("教学楼110");
-		coursesSchedule.setTeatherId(10);
-		coursesSchedule.setCoursesTime("2013-08-02 17:58:11");
-		coursesSchedule.setUserId(9);
+		Courses courses = new Courses();
+		courses.setId(2);
+		courses.setCreateTime("2013-8-10 15:51:40");
+		courses.setCreateby(10);
+		courses.setName("java");
+		courses.setClassshuours(80);
+		courses.setDescription("hello java");
 		
-		String jsonString = JSONObject.fromObject(coursesSchedule).toString();
+		String jsonString = JSONObject.fromObject(courses).toString();
+		
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-		dos.write(("json="+jsonString).getBytes());
+		dos.write(("json=" + jsonString).getBytes());
 		System.out.println(conn.getResponseCode());
 		dos.flush();
 		dos.close();
+		
 		
 		BufferedReader dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String injsonString = dis.readLine();
