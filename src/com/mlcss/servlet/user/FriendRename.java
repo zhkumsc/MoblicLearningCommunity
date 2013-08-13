@@ -13,6 +13,7 @@ import net.sf.json.JSONObject;
 import com.mlcss.bean.UserRelShip;
 import com.mlcss.dao.impl.UserRelShipDAOImpl;
 /**
+ * json格式： String JsonString = "{\"userId\":10, \"friendId\":9, \"friendNote\":\"msm\"}";
  * 修改好友备注
  * @author Administrator
  *

@@ -82,7 +82,7 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update userrelationship set friendNote='"+urs.getFriendNote()+"' where id='"+urs.getId()+"'";
+			String sql="update userrelationship set friendNote='"+urs.getFriendNote()+"' where userId='"+urs.getUserId()+"' and friendId='"+urs.getFriendId()+"'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 
