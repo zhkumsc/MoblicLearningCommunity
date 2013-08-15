@@ -53,6 +53,7 @@ public class UserSelect extends HttpServlet {
 				Map<String, List<User>> map = new LinkedHashMap<String, List<User>>();
 				map.put("list", list);
 				JSONObject jsonUser = JSONObject.fromObject(map);
+				System.out.println(jsonUser);
 				out.print(jsonUser);
 			}else{
 				out.print("用户不存在！");

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+   
 	<servlet>
 		<servlet-name>UserLogin</servlet-name>
 		<servlet-class>com.mlcss.servlet.user.UserLogin</servlet-class>
@@ -203,11 +203,35 @@
     
 
   </servlet>
-
-
-
-
-
+  <servlet>
+    <servlet-name>UserSelectById</servlet-name>
+    <servlet-class>com.mlcss.servlet.user.UserSelectById</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseQuestionAsk</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQuestionAsk</servlet-class>
+  </servlet>
+  
+<servlet>
+    <servlet-name>CourseQuestionDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQuestionDel</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CourseQuestionReplyDel</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQuestionReplyDel</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>CourseQuestionReplySelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQuestionReplySelect</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>CourseQuestionSelect</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQuestionSelect</servlet-class>
+  </servlet>
+<servlet>
+    <servlet-name>CourseQusetionReply</servlet-name>
+    <servlet-class>com.mlcss.servlet.course.CourseQusetionReply</servlet-class>
+  </servlet>
 
 
 
@@ -402,7 +426,36 @@
     <servlet-name>FriendGroupAdd</servlet-name>
     <url-pattern>/service/FriendGroupAdd</url-pattern>
   </servlet-mapping>
-	
+  <servlet-mapping>
+    <servlet-name>UserSelectById</servlet-name>
+    <url-pattern>/service/UserSelectById</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseQuestionAsk</servlet-name>
+    <url-pattern>/service/CourseQuestionAsk</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseQuestionDel</servlet-name>
+    <url-pattern>/service/CourseQuestionDel</url-pattern>
+  </servlet-mapping>
+	<servlet-mapping>
+    <servlet-name>CourseQuestionReplyDel</servlet-name>
+    <url-pattern>/service/CourseQuestionReplyDel</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseQuestionReplySelect</servlet-name>
+    <url-pattern>/service/CourseQuestionReplySelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseQuestionSelect</servlet-name>
+    <url-pattern>/service/CourseQuestionSelect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CourseQusetionReply</servlet-name>
+    <url-pattern>/service/CourseQusetionReply</url-pattern>
+  </servlet-mapping>
+  
+  
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>com.mlcss.servlet.filter.EncodingFilter</filter-class>

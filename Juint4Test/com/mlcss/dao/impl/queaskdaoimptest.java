@@ -44,7 +44,7 @@ public class queaskdaoimptest {
 	public void testdell(){
 		QuestionAsk q=new QuestionAsk();
 	   	 QuestionAskDAOImpl qd=new QuestionAskDAOImpl();
-		boolean f=qd.delById(1);
+		boolean f=qd.delById(8);
 		if(f){
 			System.out.println("删除成功");
 		}else{System.out.println("删除失败");}

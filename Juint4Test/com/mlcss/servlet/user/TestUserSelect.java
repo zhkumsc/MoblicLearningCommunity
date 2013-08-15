@@ -3,11 +3,14 @@ package com.mlcss.servlet.user;
 import static org.easymock.EasyMock.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,13 +37,16 @@ public class TestUserSelect {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "{\"str\":\"张三\", \"flag\":\"name\"}";
+        String JsonString = "{\"str\":\"小\", \"flag\":\"name\"}";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("json");
 		expectLastCall().andReturn(JsonString);   //设置前一方法被调用时的返回值
 		
 		//mockResponse.sendRedirect("wel.jsp");
+		StringWriter output = new StringWriter();   
+        PrintWriter contentWriter = new PrintWriter(output);   
+        EasyMock.expect(mockResponse.getWriter()).andReturn(contentWriter);
 		
 		replay(mockRequest);
 		replay(mockResponse);

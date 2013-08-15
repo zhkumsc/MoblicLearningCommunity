@@ -77,12 +77,12 @@ public class UserRelShipDAOImpl implements UserRelShipDAO {
 		return b;
 	}
 	
-	public boolean friendRename(UserRelShip urs) {
+	public boolean friendRename(int userId,int friendId,String friendNote) {
 		boolean b=false;
 		try{
 			//得到链接
 			conn=DBUtil.getConnection();
-			String sql="update userrelationship set friendNote='"+urs.getFriendNote()+"' where id='"+urs.getId()+"'";
+			String sql="update userrelationship set friendNote='"+friendNote+"' where userId='"+userId+"' and friendId='"+friendId+"'";
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
 			if(num==1){ 

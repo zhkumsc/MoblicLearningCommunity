@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.mlcss.bean.Courses;
 import com.mlcss.bean.QuestionAsk;
 import com.mlcss.bean.QuestionReply;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 public class queaplydaoimptest {
 	
 			
@@ -15,7 +16,7 @@ public class queaplydaoimptest {
     	 QuestionReply qr=new QuestionReply();
     	 QuestionReplyDAOImpl qrp=new QuestionReplyDAOImpl(); 
 		qr.setContent("aa");
-		qr.setQuestionid(2);
+		qr.setQuestionid(9);
 		qr.setUserid(8);
 		
 		
@@ -44,10 +45,20 @@ public class queaplydaoimptest {
 	public void testdell(){
 		QuestionReply qr=new QuestionReply();
    	 QuestionReplyDAOImpl qrp=new QuestionReplyDAOImpl();
-		boolean f=qrp.delById(1);
+		boolean f=qrp.delById(15);
 		if(f){
 			System.out.println("删除成功");
 		}else{System.out.println("删除失败");}
+	}
+	@Test
+	public void testdellall(){
+		QuestionReply q=new QuestionReply();
+		QuestionReplyDAOImpl ql=new QuestionReplyDAOImpl();
+		boolean fl=ql.delAllQuesttions(9);
+		if(fl){
+			System.out.println("shan chu cheng gong");
+			
+		}
 	}
 	@Test
 	public void testfid(){

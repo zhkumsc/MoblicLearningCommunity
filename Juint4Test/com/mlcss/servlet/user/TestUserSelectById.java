@@ -15,15 +15,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestFriendRename {
+public class TestUserSelectById {
 	
-	private FriendRename servlet;
+	private UserSelectById servlet;
 	private HttpServletRequest mockRequest;
 	private HttpServletResponse mockResponse;
 
 	@Before
 	public void setUp() throws Exception {
-        servlet = new FriendRename();
+        servlet = new UserSelectById();
 		
 		mockRequest = createMock(HttpServletRequest.class);
 		mockResponse = createMock(HttpServletResponse.class);
@@ -37,17 +37,17 @@ public class TestFriendRename {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "{\"userId\":10, \"createTime\":\"2013-08-10 11:20:05\", \"friendId\":9, \"friendNote\":\"ming\"}";
+        String JsonString = "8";
 		
 		//录制request和response的动作
-		mockRequest.getParameter("json");
+		mockRequest.getParameter("id");
 		expectLastCall().andReturn(JsonString);   //设置前一方法被调用时的返回值
 		
 		//mockResponse.sendRedirect("wel.jsp");
 		StringWriter output = new StringWriter();   
         PrintWriter contentWriter = new PrintWriter(output);   
         EasyMock.expect(mockResponse.getWriter()).andReturn(contentWriter);   
-        
+		
 		replay(mockRequest);
 		replay(mockResponse);
 		

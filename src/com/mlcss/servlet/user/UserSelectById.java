@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import com.mlcss.dao.impl.UserRelShipDAOImpl;
-/*
- * 删除好友
- */
+import com.mlcss.bean.User;
+import com.mlcss.dao.impl.UserDAOImpl;
+
 @SuppressWarnings("serial")
-public class UserFriendDel extends HttpServlet {
+public class UserSelectById extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,21 +23,19 @@ public class UserFriendDel extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		String userJson = request.getParameter("json");
-		System.out.println(userJson);
-		JSONObject jo = JSONObject.fromObject(userJson);
-		int userId = jo.getInt("userId");
-		int friendId = jo.getInt("friendId");
 		
-		UserRelShipDAOImpl ursdi = new UserRelShipDAOImpl();
-		if(ursdi.delete(userId,friendId)){
-			ursdi.delete(friendId, userId);
-			out.print("删除好友成功！");
+		PrintWriter out = response.getWriter();
+		int id = Integer.parseInt(request.getParameter("id"));
+		UserDAOImpl udi = new UserDAOImpl();
+		User user = udi.findById(id);
+		if(user!=null){
+			JSONObject jo = JSONObject.fromObject(user);
+			System.out.println(jo.toString());
+			out.print(jo);
 		}else{
-			out.print("删除好友失败！");
+			System.out.println("该用户不存在");
+			out.print("用户不存在");
 		}
-		out.close();
 	}
 
 }

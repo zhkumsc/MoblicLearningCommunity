@@ -37,7 +37,7 @@ public class TestUserFriendDel {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "{\"userId\":10, \"friendId\":11}";
+        String JsonString = "{\"userId\":10,\"createTiem\":\"2013-08-10 11:20:05\", \"friendId\":11}";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("json");

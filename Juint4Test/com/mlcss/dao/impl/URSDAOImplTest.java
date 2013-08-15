@@ -36,12 +36,12 @@ public class URSDAOImplTest {
 		ursdi.update(urs);
 	}
 	
-	@Test
+	/*@Test
 	public void testFriendRename(){
 		urs.setId(4);
 		urs.setFriendNote("小胖子");
 		ursdi.friendRename(urs);
-	}
+	}*/
 	
 	@Test
 	public void testListAll(){
