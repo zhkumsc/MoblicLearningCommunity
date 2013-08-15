@@ -37,12 +37,32 @@ public class CourseMemberRename extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String json = request.getParameter("json");
 		CoursesUserInfo coursesUserInfo = (CoursesUserInfo) JSONObject.toBean(JSONObject.fromObject(json), CoursesUserInfo.class);
-		if (coursesUserInfo==null || !coursesUserInfoDAO.update(coursesUserInfo)) {
-			response.setStatus(400);
-			out.println("修改用户备注失败！");
-		} else {
-			out.println(coursesUserInfo );
-//			out.println("修改用户备注成功！");
+		
+		CoursesUserInfo isExistInfo = coursesUserInfoDAO.findById(coursesUserInfo.getCoursesId(), coursesUserInfo.getUserId());
+		
+		//更新有两种情况
+		//第一：用户备注或角色 没有存在在数据库，就需要创建一条记录。
+		//第二：用户备注或角色  已经存在数据库了，就直接更新记录。
+			
+		//用户备注或角色没有记录
+		if(isExistInfo == null){
+			//创建记录
+			if(coursesUserInfoDAO.add(coursesUserInfo)){
+				out.println(coursesUserInfo );
+			}else{
+				//输出错误
+				response.setStatus(400);
+				out.println("修改用户备注失败！");
+			}
+		}else{//用户备注或角色有记录
+			  //更新记录
+			if(coursesUserInfoDAO.update(coursesUserInfo)){
+				out.println(coursesUserInfo );
+			}else{
+				//输出错误
+				response.setStatus(400);
+				out.println("修改用户备注失败！");
+			}
 		}
 		out.flush();
 		out.close();

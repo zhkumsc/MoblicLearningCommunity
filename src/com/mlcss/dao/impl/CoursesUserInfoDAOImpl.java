@@ -116,7 +116,7 @@ public class CoursesUserInfoDAOImpl implements CoursesUserInfoDAO {
 	}
 
 	public CoursesUserInfo findById(int coursesId, int userId) {
-		CoursesUserInfo cuinfo = new CoursesUserInfo();
+		CoursesUserInfo cuinfo = null;
 		try {
 			conn = DBUtil.getConnection();
 			String sql = "select * from coursesuserinfo where coursesId=? and userId=?";
@@ -125,6 +125,7 @@ public class CoursesUserInfoDAOImpl implements CoursesUserInfoDAO {
 			ps.setInt(2, userId);
 			rs = ps.executeQuery();
 			while(rs.next()){
+				cuinfo = new CoursesUserInfo();
 				cuinfo.setId(rs.getInt("id"));
 				cuinfo.setUserId(rs.getInt("userId"));
 				cuinfo.setCoursesId(rs.getInt("coursesId"));

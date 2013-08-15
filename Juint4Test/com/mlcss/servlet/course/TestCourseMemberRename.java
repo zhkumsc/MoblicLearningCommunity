@@ -28,9 +28,9 @@ public class TestCourseMemberRename {
 				"application/x-www-form-urlencoded");
 		
 		CoursesUserInfo coursesUserInfo = new CoursesUserInfo();
-		coursesUserInfo.setUserId(8);
+		coursesUserInfo.setUserId(10);
 		coursesUserInfo.setCoursesId(2);
-		coursesUserInfo.setRemark("dsf 明");
+		coursesUserInfo.setRemark("ds");
 		
 		String jsonString = JSONObject.fromObject(coursesUserInfo).toString();
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
