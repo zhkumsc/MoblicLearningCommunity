@@ -108,7 +108,7 @@ public class QuestionReplyDAOImpl implements QuestionReplyDAO {
 		PreparedStatement ps = null;
 		try {
 			conn = DBUtil.getConnection();
-			String sql = "delete from questionrelpy where  questionId=?";
+			String sql = "delete from questionreply where  questionId=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,questionid);
 			

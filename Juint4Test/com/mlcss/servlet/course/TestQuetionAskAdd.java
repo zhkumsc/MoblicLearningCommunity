@@ -4,22 +4,25 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 
 import net.sf.json.JSONObject;
 
 import org.junit.Test;
 
-import com.mlcss.bean.CoursesUserInfo;
+import com.mlcss.bean.QuestionAsk;
 /**
- * @author jc
+ * @author 
  */
-public class TestCourseMemberRename {
+public class TestQuetionAskAdd {
 
 	@Test
-	public void testReceive() throws Exception {
+	public void testReceive() throws Exception{
+		
 		URL url = new URL(
-				"http://localhost:8080/MoblicLearningCommunity/service/CourseMemberRename");
+				"http://localhost:8080/MoblicLearningCommunity/service/CourseQuestionAsk");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
@@ -27,24 +30,26 @@ public class TestCourseMemberRename {
 		conn.setRequestProperty("Content-Type",
 				"application/x-www-form-urlencoded");
 		
-		CoursesUserInfo coursesUserInfo = new CoursesUserInfo();
-		coursesUserInfo.setUserId(10);
-		coursesUserInfo.setCoursesId(2);
-		coursesUserInfo.setRemark("ds");
+		QuestionAsk  que=new QuestionAsk();
+//		courses.setCreateTime(DateTimeUtil.String2Date("2013-8-10 15:51:40"));
+		que.setCreateby(8);
+		que.setTitle("ai");
+		que.setCoursesid(6);
+		que.setContent("aaaa");
 		
-		String jsonString = JSONObject.fromObject(coursesUserInfo).toString();
+		String jsonString = JSONObject.fromObject(que).toString();
+		
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-		dos.write(("json="+jsonString).getBytes());
+		dos.write(("json=" + jsonString).getBytes());
 		System.out.println(conn.getResponseCode());
 		dos.flush();
 		dos.close();
 		
-		BufferedReader dis = null;
-		dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+		BufferedReader dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String injsonString = dis.readLine();
-		System.out.println("coursesUserInfo:"+injsonString); 
+		System.out.println(injsonString); 
 		dis.close();
-		conn.disconnect(); 
-
+		conn.disconnect();
 	}
 }

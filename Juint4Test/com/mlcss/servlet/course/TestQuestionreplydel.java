@@ -6,20 +6,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 import net.sf.json.JSONObject;
 
 import org.junit.Test;
 
-import com.mlcss.bean.CoursesUserInfo;
+import com.mlcss.bean.QuestionAsk;
+import com.mlcss.bean.QuestionReply;
 /**
  * @author jc
  */
-public class TestCourseMemberRename {
+
+public class TestQuestionreplydel {
 
 	@Test
-	public void testReceive() throws Exception {
+	public void testReceive() throws Exception{
+		
 		URL url = new URL(
-				"http://localhost:8080/MoblicLearningCommunity/service/CourseMemberRename");
+				"http://localhost:8080/MoblicLearningCommunity/service/CourseQuestionReplyDel");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
@@ -27,24 +31,23 @@ public class TestCourseMemberRename {
 		conn.setRequestProperty("Content-Type",
 				"application/x-www-form-urlencoded");
 		
-		CoursesUserInfo coursesUserInfo = new CoursesUserInfo();
-		coursesUserInfo.setUserId(10);
-		coursesUserInfo.setCoursesId(2);
-		coursesUserInfo.setRemark("ds");
+		QuestionReply q=new QuestionReply();
+		q.setId(22);
+		//q.setQuestionid(9);
 		
-		String jsonString = JSONObject.fromObject(coursesUserInfo).toString();
+String jsonString = JSONObject.fromObject(q).toString();
+		
 		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-		dos.write(("json="+jsonString).getBytes());
+		dos.write(("json=" + jsonString).getBytes());
 		System.out.println(conn.getResponseCode());
 		dos.flush();
 		dos.close();
 		
-		BufferedReader dis = null;
-		dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+		BufferedReader dis = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String injsonString = dis.readLine();
-		System.out.println("coursesUserInfo:"+injsonString); 
+		System.out.println(injsonString); 
 		dis.close();
-		conn.disconnect(); 
-
+		conn.disconnect();
 	}
 }
