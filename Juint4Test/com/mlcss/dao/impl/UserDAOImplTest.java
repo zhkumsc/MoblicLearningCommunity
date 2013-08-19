@@ -17,6 +17,9 @@ public class UserDAOImplTest {
 		u.setEmail("jkr343j@qq.com");
 		u.setUserIcon("qewrddijkj");
 		u.setCreateTime(new Date());
+		u.setQq(111322422);
+		u.setSchool("仲恺农业工程学院");
+		u.setSignature("这个人很懒，什么都没留下!");
 		UserDAOImpl udi = new UserDAOImpl();
 		udi.add(u);
 	}
@@ -24,7 +27,7 @@ public class UserDAOImplTest {
 	@Test
 	public void testDelete(){
 		UserDAOImpl udi = new UserDAOImpl();
-		udi.delete(12);
+		udi.delete(28);
 	}
 	
 	@Test
@@ -43,7 +46,7 @@ public class UserDAOImplTest {
 	public void testFindById(){
 		UserDAOImpl udi = new UserDAOImpl();
 		User u = udi.findById(10);
-		System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime());
+		System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime()+u.getQq()+u.getSchool()+u.getSignature());
 	}
 	
 	@Test
@@ -52,23 +55,23 @@ public class UserDAOImplTest {
 		List<User> list = udi.listAll();
 		for(int i=0;i<list.size();i++){
 			User u = list.get(i);
-			System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime());
+			System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime()+u.getQq()+u.getSchool()+u.getSignature());
 		}
 	}
 	
 	@Test
 	public void testFindByEmail(){
 		UserDAOImpl udi = new UserDAOImpl();
-		User u = udi.findByEmail("12323@qq.com");
-		System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime());
+		User u = udi.findByEmail("111111@qq.com");
+		System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime()+u.getQq()+u.getSchool()+u.getSignature());
 	}
 	
 	@Test
 	public void testFindByName(){
 		UserDAOImpl udi = new UserDAOImpl();
-		List<User> list = udi.findByName("张三");
+		List<User> list = udi.findByName("胖子");
 		for(User u : list){
-			System.out.println(u);
+			System.out.println(u.getId()+u.getName()+u.getPassword()+u.getEmail()+u.getCreateTime()+u.getQq()+u.getSchool()+u.getSignature());
 		}
 	}
 }

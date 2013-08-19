@@ -31,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
 			conn=DBUtil.getConnection();
 
 
-			String sql="insert into users(name,password,email,userIcon,createTime) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"','"+user.getUserIcon()+"','"+date+"') ";
+			String sql="insert into users(name,password,email,userIcon,createTime,qq,school,signature) values('"+user.getName()+"','"+user.getPassword()+"','"+user.getEmail()+"','"+user.getUserIcon()+"','"+date+"','"+user.getQq()+"','"+user.getSchool()+"','"+user.getSignature()+"') ";
 
 			
 			ps=conn.prepareStatement(sql);
@@ -75,7 +75,7 @@ public class UserDAOImpl implements UserDAO {
 			//得到链接
 			conn=DBUtil.getConnection();
 
-			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"',userIcon='"+user.getUserIcon()+"' where id='"+user.getId()+"'";
+			String sql="update users set name='"+user.getName()+"',password='"+user.getPassword()+"',email='"+user.getEmail()+"',userIcon='"+user.getUserIcon()+"',qq='"+user.getQq()+"',school='"+user.getSchool()+"',signature='"+user.getSignature()+"' where id='"+user.getId()+"'";
 
 			ps=conn.prepareStatement(sql);
 			int num=ps.executeUpdate();
@@ -103,10 +103,14 @@ public class UserDAOImpl implements UserDAO {
 				u = new User();		
 				u.setId(rs.getInt(1));
 				u.setName(rs.getString(2));
-				//u.setPassword(rs.getString(3));
+				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setUserIcon(rs.getString(5));
-				u.setCreateTime(new java.util.Date(rs.getDate(6).getTime()));
+				u.setCreateTime(rs.getDate(6));
+				u.setQq(rs.getLong(7));
+				u.setSchool(rs.getString(8));
+				u.setSignature(rs.getString(9));
+				//u.setCreateTime(new java.util.Date(rs.getDate(6).getTime()));
 			}
 			
 		}catch(Exception e){
@@ -135,6 +139,9 @@ public class UserDAOImpl implements UserDAO {
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setCreateTime(rs.getDate(6));
+				u.setQq(rs.getLong(7));
+				u.setSchool(rs.getString(8));
+				u.setSignature(rs.getString(9));
 				
 				list.add(u);
 			}
@@ -163,6 +170,9 @@ public class UserDAOImpl implements UserDAO {
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setCreateTime(rs.getDate(6));
+				u.setQq(rs.getLong(7));
+				u.setSchool(rs.getString(8));
+				u.setSignature(rs.getString(9));
 			}
 			
 		}catch(Exception e){
@@ -189,6 +199,9 @@ public class UserDAOImpl implements UserDAO {
 				u.setPassword(rs.getString(3));
 				u.setEmail(rs.getString(4));
 				u.setCreateTime(new java.util.Date(rs.getDate(6).getTime()));
+				u.setQq(rs.getLong(7));
+				u.setSchool(rs.getString(8));
+				u.setSignature(rs.getString(9));
 				
 				list.add(u);
 			}

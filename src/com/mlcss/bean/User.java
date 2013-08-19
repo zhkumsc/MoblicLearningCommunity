@@ -12,8 +12,56 @@ public class User implements Serializable{
 	private String email;
 	private String userIcon;
 	private Date createTime;
+	private long qq;
+	private String school;
+	private String signature;
 	
 	
+
+
+
+	public long getQq() {
+		return qq;
+	}
+
+
+
+
+	public void setQq(long qq) {
+		this.qq = qq;
+	}
+
+
+
+
+	public String getSchool() {
+		return school;
+	}
+
+
+
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+
+
+
+	public String getSignature() {
+		return signature;
+	}
+
+
+
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+
+
+
 	public String getUserIcon() {
 		return userIcon;
 	}

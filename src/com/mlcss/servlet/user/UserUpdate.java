@@ -45,6 +45,15 @@ public class UserUpdate extends HttpServlet {
 		if(u1.getUserIcon()!=null){
 			u2.setUserIcon(u1.getUserIcon());
 		}
+		if(u1.getQq()!=0){
+			u2.setQq(u1.getQq());
+		}
+		if(u1.getSchool()!=null){
+			u2.setSchool(u1.getSchool());
+		}
+		if(u1.getSignature()!=null){
+			u2.setSignature(u1.getSignature());
+		}
 		
 		if(dao.update(u2)){
 			out.print("修改成功");

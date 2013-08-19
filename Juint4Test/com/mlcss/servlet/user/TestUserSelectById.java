@@ -37,7 +37,7 @@ public class TestUserSelectById {
 
 	@Test
 	public void test() throws ServletException, IOException {
-        String JsonString = "8";
+        String JsonString = "11";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("id");

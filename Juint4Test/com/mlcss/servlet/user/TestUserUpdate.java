@@ -49,7 +49,7 @@ public class TestUserUpdate {
 	@Test
 	public void doPost() throws IOException, ServletException{
 		
-		String JsonString = "{\"id\":11,\"name\":\"大小胖子\"}";
+		String JsonString = "{\"id\":11,\"school\":\"华南师范大学\"}";
 		
 		//录制request和response的动作
 		mockRequest.getParameter("json");
