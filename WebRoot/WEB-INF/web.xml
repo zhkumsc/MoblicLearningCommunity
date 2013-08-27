@@ -232,6 +232,11 @@
     <servlet-name>CourseQusetionReply</servlet-name>
     <servlet-class>com.mlcss.servlet.course.CourseQusetionReply</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetUserSchedules</servlet-name>
+    <servlet-class>com.mlcss.servlet.assistant.GetUserSchedules</servlet-class>
+  </servlet>
+
 
 
 
@@ -453,6 +458,10 @@
   <servlet-mapping>
     <servlet-name>CourseQusetionReply</servlet-name>
     <url-pattern>/service/CourseQusetionReply</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetUserSchedules</servlet-name>
+    <url-pattern>/service/GetUserSchedules</url-pattern>
   </servlet-mapping>
   
   
